@@ -51,6 +51,8 @@ namespace MySingingMonsters
                 case "Poison":
                     weakTo = "Plasma";
                     break;
+                case "None":
+                    break;
             }
         }
 

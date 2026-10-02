@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Buffers.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace MySingingMonsters
 {
-    internal class PotBelly : Monster
+    internal class PotBellyInfamousMugPot : Monster 
     {
         public List<Attack> attacks;
 
 
-        public PotBelly(int Level)
+        public PotBellyInfamousMugPot(int Level)
         {
             baseHp = 175;
             baseAttack = 85;
@@ -21,7 +20,8 @@ namespace MySingingMonsters
             elems = new List<Element>();
             elems.Add(new Element("Plant"));
             attacks = new List<Attack>();
-            attacks.Add(new Attack("Flytrap duet", new Element("None"), 1  ));
+            attacks.Add(new Attack("Flytrap duet", new Element("None"), 1));
+            attacks.Add(new Attack("Infamous Mug Pot", new Element("None"), 1.21));
             if (level >= 5) attacks.Add(new Attack("Looping Vine", new Element("Plant"), 1.18));
 
         }

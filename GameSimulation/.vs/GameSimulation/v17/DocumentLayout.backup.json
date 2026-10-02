@@ -3,6 +3,37 @@
   "WorkspaceRootPath": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{443F319B-E6D6-474D-AABF-170737AC1702}|..\\MySingingMonsters\\MySingingMonsters.csproj|c:\\users\\midge\\source\\repos\\gameteamsim\\mysingingmonsters\\potbelly.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{443F319B-E6D6-474D-AABF-170737AC1702}|..\\MySingingMonsters\\MySingingMonsters.csproj|c:\\users\\midge\\source\\repos\\gameteamsim\\mysingingmonsters\\monster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{443F319B-E6D6-474D-AABF-170737AC1702}|..\\MySingingMonsters\\MySingingMonsters.csproj|c:\\users\\midge\\source\\repos\\gameteamsim\\mysingingmonsters\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{443F319B-E6D6-474D-AABF-170737AC1702}|..\\MySingingMonsters\\MySingingMonsters.csproj|c:\\users\\midge\\source\\repos\\gameteamsim\\mysingingmonsters\\wrapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{443F319B-E6D6-474D-AABF-170737AC1702}|..\\MySingingMonsters\\MySingingMonsters.csproj|c:\\users\\midge\\source\\repos\\gameteamsim\\mysingingmonsters\\mammot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{443F319B-E6D6-474D-AABF-170737AC1702}|..\\MySingingMonsters\\MySingingMonsters.csproj|c:\\users\\midge\\source\\repos\\gameteamsim\\mysingingmonsters\\mysingingmonsters.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{443F319B-E6D6-474D-AABF-170737AC1702}|..\\MySingingMonsters\\MySingingMonsters.csproj|c:\\users\\midge\\source\\repos\\gameteamsim\\mysingingmonsters\\element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{443F319B-E6D6-474D-AABF-170737AC1702}|..\\MySingingMonsters\\MySingingMonsters.csproj|c:\\users\\midge\\source\\repos\\gameteamsim\\mysingingmonsters\\team.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5201B69-2A83-4406-92C6-C5861411A6AC}|GameSimulation.csproj|c:\\users\\midge\\source\\repos\\gameteamsim\\gamesimulation\\gamesimulation.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{C5201B69-2A83-4406-92C6-C5861411A6AC}|GameSimulation.csproj|solutionrelative:gamesimulation.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{443F319B-E6D6-474D-AABF-170737AC1702}|..\\MySingingMonsters\\MySingingMonsters.csproj|c:\\users\\midge\\source\\repos\\gameteamsim\\mysingingmonsters\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C5201B69-2A83-4406-92C6-C5861411A6AC}|GameSimulation.csproj|c:\\users\\midge\\source\\repos\\gameteamsim\\gamesimulation\\dash.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C5201B69-2A83-4406-92C6-C5861411A6AC}|GameSimulation.csproj|solutionrelative:dash.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -38,19 +69,144 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PotBelly.cs",
+              "DocumentMoniker": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\MySingingMonsters\\PotBelly.cs",
+              "RelativeDocumentMoniker": "..\\MySingingMonsters\\PotBelly.cs",
+              "ToolTip": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\MySingingMonsters\\PotBelly.cs",
+              "RelativeToolTip": "..\\MySingingMonsters\\PotBelly.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-02T07:12:17.52Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Element.cs",
+              "DocumentMoniker": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\MySingingMonsters\\Element.cs",
+              "RelativeDocumentMoniker": "..\\MySingingMonsters\\Element.cs",
+              "ToolTip": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\MySingingMonsters\\Element.cs",
+              "RelativeToolTip": "..\\MySingingMonsters\\Element.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-02T06:56:58.782Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Mammot.cs",
+              "DocumentMoniker": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\MySingingMonsters\\Mammot.cs",
+              "RelativeDocumentMoniker": "..\\MySingingMonsters\\Mammot.cs",
+              "ToolTip": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\MySingingMonsters\\Mammot.cs",
+              "RelativeToolTip": "..\\MySingingMonsters\\Mammot.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-02T06:53:20.647Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\MySingingMonsters\\Program.cs",
+              "RelativeDocumentMoniker": "..\\MySingingMonsters\\Program.cs",
+              "ToolTip": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\MySingingMonsters\\Program.cs",
+              "RelativeToolTip": "..\\MySingingMonsters\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-02T06:50:37.076Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Wrapper.cs",
+              "DocumentMoniker": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\MySingingMonsters\\Wrapper.cs",
+              "RelativeDocumentMoniker": "..\\MySingingMonsters\\Wrapper.cs",
+              "ToolTip": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\MySingingMonsters\\Wrapper.cs",
+              "RelativeToolTip": "..\\MySingingMonsters\\Wrapper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-02T06:49:30.431Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Team.cs",
+              "DocumentMoniker": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\MySingingMonsters\\Team.cs",
+              "RelativeDocumentMoniker": "..\\MySingingMonsters\\Team.cs",
+              "ToolTip": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\MySingingMonsters\\Team.cs",
+              "RelativeToolTip": "..\\MySingingMonsters\\Team.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-02T06:48:24.134Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MySingingMonsters",
+              "DocumentMoniker": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\MySingingMonsters\\MySingingMonsters.csproj",
+              "RelativeDocumentMoniker": "..\\MySingingMonsters\\MySingingMonsters.csproj",
+              "ToolTip": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\MySingingMonsters\\MySingingMonsters.csproj",
+              "RelativeToolTip": "..\\MySingingMonsters\\MySingingMonsters.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-10-02T06:48:13.67Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "GameSimulation",
+              "DocumentMoniker": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\GameSimulation.csproj",
+              "RelativeDocumentMoniker": "GameSimulation.csproj",
+              "ToolTip": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\GameSimulation.csproj",
+              "RelativeToolTip": "GameSimulation.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-10-02T06:48:03.976Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Monster.cs",
+              "DocumentMoniker": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\MySingingMonsters\\Monster.cs",
+              "RelativeDocumentMoniker": "..\\MySingingMonsters\\Monster.cs",
+              "ToolTip": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\MySingingMonsters\\Monster.cs",
+              "RelativeToolTip": "..\\MySingingMonsters\\Monster.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAkwCYAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-02T06:38:21.491Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 9,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\MySingingMonsters\\Form1.cs",
+              "RelativeDocumentMoniker": "..\\MySingingMonsters\\Form1.cs",
+              "ToolTip": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\MySingingMonsters\\Form1.cs [Design]",
+              "RelativeToolTip": "..\\MySingingMonsters\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-02T06:38:02.937Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
               "Title": "Turn.cs",
               "DocumentMoniker": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\Turn.cs",
               "RelativeDocumentMoniker": "Turn.cs",
@@ -58,12 +214,11 @@
               "RelativeToolTip": "Turn.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-01T05:36:49.15Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-01T05:36:49.15Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 10,
               "Title": "Dash.cs",
               "DocumentMoniker": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\Dash.cs",
               "RelativeDocumentMoniker": "Dash.cs",
@@ -76,7 +231,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 15,
               "Title": "Ability.cs",
               "DocumentMoniker": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\Ability.cs",
               "RelativeDocumentMoniker": "Ability.cs",
@@ -88,7 +243,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 11,
               "Title": "Christian.cs",
               "DocumentMoniker": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\Christian.cs",
               "RelativeDocumentMoniker": "Christian.cs",
@@ -96,12 +251,11 @@
               "RelativeToolTip": "Christian.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-30T23:54:06.367Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-30T23:54:06.367Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 14,
               "Title": "Dice.cs",
               "DocumentMoniker": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\Dice.cs",
               "RelativeDocumentMoniker": "Dice.cs",
@@ -109,12 +263,11 @@
               "RelativeToolTip": "Dice.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-30T23:15:27.242Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-30T23:15:27.242Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 12,
               "Title": "Character.cs",
               "DocumentMoniker": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\Character.cs",
               "RelativeDocumentMoniker": "Character.cs",
@@ -122,12 +275,15 @@
               "RelativeToolTip": "Character.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-30T23:10:24.053Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-30T23:10:24.053Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 16,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
