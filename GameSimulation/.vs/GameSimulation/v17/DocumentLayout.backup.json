@@ -1,0 +1,144 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C5201B69-2A83-4406-92C6-C5861411A6AC}|GameSimulation.csproj|c:\\users\\midge\\source\\repos\\gameteamsim\\gamesimulation\\dash.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5201B69-2A83-4406-92C6-C5861411A6AC}|GameSimulation.csproj|solutionrelative:dash.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5201B69-2A83-4406-92C6-C5861411A6AC}|GameSimulation.csproj|c:\\users\\midge\\source\\repos\\gameteamsim\\gamesimulation\\christian.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5201B69-2A83-4406-92C6-C5861411A6AC}|GameSimulation.csproj|solutionrelative:christian.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5201B69-2A83-4406-92C6-C5861411A6AC}|GameSimulation.csproj|c:\\users\\midge\\source\\repos\\gameteamsim\\gamesimulation\\character.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5201B69-2A83-4406-92C6-C5861411A6AC}|GameSimulation.csproj|solutionrelative:character.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5201B69-2A83-4406-92C6-C5861411A6AC}|GameSimulation.csproj|c:\\users\\midge\\source\\repos\\gameteamsim\\gamesimulation\\turn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5201B69-2A83-4406-92C6-C5861411A6AC}|GameSimulation.csproj|solutionrelative:turn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5201B69-2A83-4406-92C6-C5861411A6AC}|GameSimulation.csproj|c:\\users\\midge\\source\\repos\\gameteamsim\\gamesimulation\\dice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5201B69-2A83-4406-92C6-C5861411A6AC}|GameSimulation.csproj|solutionrelative:dice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5201B69-2A83-4406-92C6-C5861411A6AC}|GameSimulation.csproj|c:\\users\\midge\\source\\repos\\gameteamsim\\gamesimulation\\ability.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5201B69-2A83-4406-92C6-C5861411A6AC}|GameSimulation.csproj|solutionrelative:ability.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5201B69-2A83-4406-92C6-C5861411A6AC}|GameSimulation.csproj|C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C5201B69-2A83-4406-92C6-C5861411A6AC}|GameSimulation.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Turn.cs",
+              "DocumentMoniker": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\Turn.cs",
+              "RelativeDocumentMoniker": "Turn.cs",
+              "ToolTip": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\Turn.cs",
+              "RelativeToolTip": "Turn.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-01T05:36:49.15Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Dash.cs",
+              "DocumentMoniker": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\Dash.cs",
+              "RelativeDocumentMoniker": "Dash.cs",
+              "ToolTip": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\Dash.cs",
+              "RelativeToolTip": "Dash.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-01T00:21:50.831Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Ability.cs",
+              "DocumentMoniker": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\Ability.cs",
+              "RelativeDocumentMoniker": "Ability.cs",
+              "ToolTip": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\Ability.cs",
+              "RelativeToolTip": "Ability.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-01T00:16:40.078Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Christian.cs",
+              "DocumentMoniker": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\Christian.cs",
+              "RelativeDocumentMoniker": "Christian.cs",
+              "ToolTip": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\Christian.cs",
+              "RelativeToolTip": "Christian.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-30T23:54:06.367Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Dice.cs",
+              "DocumentMoniker": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\Dice.cs",
+              "RelativeDocumentMoniker": "Dice.cs",
+              "ToolTip": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\Dice.cs",
+              "RelativeToolTip": "Dice.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-30T23:15:27.242Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Character.cs",
+              "DocumentMoniker": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\Character.cs",
+              "RelativeDocumentMoniker": "Character.cs",
+              "ToolTip": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\Character.cs",
+              "RelativeToolTip": "Character.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-30T23:10:24.053Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\Form1.cs [Design]",
+              "RelativeToolTip": "Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-30T23:09:14.027Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

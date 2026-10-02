@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GameSimulation
+{
+    internal class Ability
+    {
+        
+        public int diceCost;
+        public string attackType;
+        public int range;
+
+        public Character user;
+    }
+}
