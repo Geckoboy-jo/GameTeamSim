@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MySingingMonsters
 {
@@ -14,11 +15,11 @@ namespace MySingingMonsters
         public Team Opononent;
         public Wrapper()
         {
-            Player = new Team(new PotbellySoilsOfSpore(20), new Mammot(20), new MammotBounceCap(20));   
+            Player = new Team(new PotbellySoilsOfSpore(1), new Mammot(1), new MammotBounceCap(1));   
             Opononent = new Team(new Mammot(20), new PotBelly(5), new MammotOffTheCuffs(20));
             
         }
-        public void game()
+        public string game()
         {
             while (Player.lost == false && Opononent.lost == false)
             {
@@ -26,13 +27,12 @@ namespace MySingingMonsters
                 if (Opononent.lost == true) break;
                 turn(Opononent, Player);
             }
-            if(Player.lost == true) Console.WriteLine("You lost");
-            else Console.WriteLine("You won");
+            return Player.lost ? "You lost" : "You won";
         }
         public void turn(Team O, Team D)
         {
             float maxDamage = 0;
-            Monster bestMonster = null;
+            Monster? bestMonster = null;
             foreach (Monster monster in O.getMonsters())
             {   
                 if(monster.isAlive == false) continue;
@@ -46,22 +46,25 @@ namespace MySingingMonsters
                     }
                 }
             }
+            if (bestMonster is null)
+            {
+                O.lost = true;
+                return;
+            }
             O.Active = bestMonster;
             D.Active.takeDamage(maxDamage);
             if (D.Active.isAlive == false) 
             {
-                int counter = 0;
-                foreach (Monster monster in D.getMonsters())
+                List<Monster> defenders = D.getMonsters();
+                foreach (Monster monster in defenders)
                 {
-                    
                     if(monster.isAlive == true)
                     {
                         D.Active = monster;
-                        break;
+                        return;
                     }
-                    else counter++;
                 }
-                if(counter == 2) { D.lost = true; }
+                D.lost = true;
             } 
         }
         public float calculateDamage(Monster O, Attack A, Monster D)

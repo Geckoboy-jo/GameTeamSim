@@ -5,3 +5,4 @@ C:\Users\midge\source\repos\GameTeamSim\GameSimulation\obj\Debug\net8.0-windows\
 C:\Users\midge\source\repos\GameTeamSim\GameSimulation\obj\Debug\net8.0-windows\GameSimulation.AssemblyInfo.cs
 C:\Users\midge\source\repos\GameTeamSim\GameSimulation\obj\Debug\net8.0-windows\GameSimulation.csproj.CoreCompileInputs.cache
 C:\Users\midge\source\repos\GameTeamSim\GameSimulation\obj\Debug\net8.0-windows\GameSimulation.sourcelink.json
+C:\Users\midge\source\repos\GameTeamSim\GameSimulation\obj\Debug\net8.0-windows\GameSimulation.csproj.AssemblyReference.cache

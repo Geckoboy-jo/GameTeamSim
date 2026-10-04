@@ -1,0 +1,12 @@
+﻿namespace MySingingMonsters
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+            var wrapper = new MySingingMonsters.Wrapper();
+            winBox.Text = wrapper.game();
+        }
+    }
+}

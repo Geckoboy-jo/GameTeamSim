@@ -5,6 +5,11 @@ namespace MySingingMonsters
         public Form1()
         {
             InitializeComponent();
+            Shown += async (_, _) =>
+            {
+                winBox.Text = "Simulating...";
+                winBox.Text = await Task.Run(() => new Wrapper().game());
+            };
         }
     }
 }

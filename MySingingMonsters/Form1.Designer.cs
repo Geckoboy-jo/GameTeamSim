@@ -1,4 +1,4 @@
-﻿namespace MySingingMonsters
+namespace MySingingMonsters
 {
     partial class Form1
     {
@@ -28,24 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
+            winBox = new TextBox();
             SuspendLayout();
             // 
-            // textBox1
+            // winBox
             // 
-            textBox1.Font = new Font("Segoe UI", 50F);
-            textBox1.Location = new Point(380, 307);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(820, 96);
-            textBox1.TabIndex = 0;
-            textBox1.Text = "winner is";
+            winBox.Font = new Font("Segoe UI", 50F);
+            winBox.Location = new Point(380, 307);
+            winBox.Name = "winBox";
+            winBox.Size = new Size(820, 96);
+            winBox.TabIndex = 0;
+            winBox.Text = "winner is";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1604, 822);
-            Controls.Add(textBox1);
+            Controls.Add(winBox);
             Name = "Form1";
             Text = "Form1";
             ResumeLayout(false);
@@ -54,6 +54,6 @@
 
         #endregion
 
-        private TextBox textBox1;
+        public TextBox winBox;
     }
 }

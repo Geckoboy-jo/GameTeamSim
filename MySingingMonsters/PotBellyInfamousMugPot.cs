@@ -8,9 +8,6 @@ namespace MySingingMonsters
 {
     internal class PotBellyInfamousMugPot : Monster 
     {
-        public List<Attack> attacks;
-
-
         public PotBellyInfamousMugPot(int Level)
         {
             baseHp = 175;

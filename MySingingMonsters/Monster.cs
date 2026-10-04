@@ -21,6 +21,7 @@ namespace MySingingMonsters
         {
             HP = (float)(baseHp*(1+.2692f*(level-1)));
             Attack = (float)(baseAttack * (1 + .2692f * (level - 1)));
+            isAlive = true;
         }
         public void takeDamage(float damage)
         {

@@ -9,9 +9,6 @@ namespace MySingingMonsters
 {
     internal class PotBellyLichenthrope : Monster
     {
-        public List<Attack> attacks;
-
-
         public PotBellyLichenthrope(int Level)
         {
             baseHp = 175;

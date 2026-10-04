@@ -1,0 +1,90 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace MySingingMonsters
+{
+    internal class Wrapper
+    {
+        public Team Player;
+        public Team Opononent;
+        public Wrapper()
+        {
+            Player = new Team(new PotbellySoilsOfSpore(20), new Mammot(20), new MammotBounceCap(20));   
+            Opononent = new Team(new Mammot(20), new PotBelly(5), new MammotOffTheCuffs(20));
+            
+        }
+        public void game()
+        {
+            while (Player.lost == false && Opononent.lost == false)
+            {
+                turn(Player, Opononent);
+                if (Opononent.lost == true) break;
+                turn(Opononent, Player);
+            }
+            MessageBox.Show(Player.lost ? "You lost" : "You won");
+        }
+        public void turn(Team O, Team D)
+        {
+            float maxDamage = 0;
+            Monster bestMonster = null;
+            foreach (Monster monster in O.getMonsters())
+            {   
+                if(monster.isAlive == false) continue;
+                foreach (Attack attack in monster.attacks)
+                {
+                    float damage = calculateDamage(monster, attack, D.Active);
+                    if(damage > maxDamage)
+                    {
+                        maxDamage = damage;
+                        bestMonster = monster;
+                    }
+                }
+            }
+            O.Active = bestMonster;
+            D.Active.takeDamage(maxDamage);
+            if (D.Active.isAlive == false) 
+            {
+                int counter = 0;
+                foreach (Monster monster in D.getMonsters())
+                {
+                    
+                    if(monster.isAlive == true)
+                    {
+                        D.Active = monster;
+                        break;
+                    }
+                    else counter++;
+                }
+                if(counter == 2) { D.lost = true; }
+            } 
+        }
+        public float calculateDamage(Monster O, Attack A, Monster D)
+        {
+            float multiplier = 1;
+            foreach (Element element in D.elems)
+            {
+                if (A.type.name == element.weakTo)
+                {
+                    if (D.elems.Count == 1) multiplier = multiplier * 2;
+                    else if (D.elems.Count == 2) multiplier = multiplier * 1.5f;
+                    else if (D.elems.Count == 3) multiplier = multiplier * 1.33f;
+                    else if (D.elems.Count == 4) multiplier = multiplier * 1.25f;
+                }
+                if(A.type.weakTo == element.name)
+                {
+                    if (D.elems.Count == 1) multiplier = multiplier * 0.5f;
+                    else if (D.elems.Count == 2) multiplier = multiplier * 0.66f;
+                    else if (D.elems.Count == 3) multiplier = multiplier * 0.75f;
+                    else if (D.elems.Count == 4) multiplier = multiplier * 0.8f;
+                }
+            }
+            return multiplier * O.Attack * A.basePower;
+        }
+    }
+}

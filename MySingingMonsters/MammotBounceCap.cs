@@ -8,7 +8,6 @@ namespace MySingingMonsters
 {
     internal class MammotBounceCap  : Monster
     {
-        public List<Attack> attacks;
         public MammotBounceCap(int Level)
         {
             baseHp = 225;
