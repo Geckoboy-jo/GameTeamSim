@@ -12,9 +12,9 @@ namespace MySingingMonsters
     {
         public Team Player;
         public Team Opononent;
-        public Wrapper()
+        Wrapper()
         {
-            Player = new Team(new PotbellySoilsOfSpore(20), new Mammot(20), new MammotBounceCap(20));   
+            Player = new Team(new PotbellySoilsOfSpore(20), new Mammot(20), new MammotBounceCap(20));
             Opononent = new Team(new Mammot(20), new PotBelly(5), new MammotOffTheCuffs(20));
             
         }

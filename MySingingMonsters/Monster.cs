@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MySingingMonsters
 {
-    internal class Monster
+    internal partial class Monster
     {
         public float HP { get; set; }
         public float baseHp { get; set; }
@@ -14,15 +14,15 @@ namespace MySingingMonsters
         public float baseAttack { get; set; }
 
         public int level { get; set; }
-        private bool isAlive { get; set; }
+        public bool isAlive { get; set; }
         public List<Element> elems;
-
+        public List<Attack> attacks;
         public void setStats()
         {
-            HP = (float)(baseHp*(1+.2692*(level-1)));
-            Attack = (float)(baseAttack * (1 + .2692 * (level - 1)));
+            HP = (float)(baseHp*(1+.2692f*(level-1)));
+            Attack = (float)(baseAttack * (1 + .2692f * (level - 1)));
         }
-        public void takeDame(float damage)
+        public void takeDamage(float damage)
         {
             HP -= damage;
             if (HP <= 0)

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,8 +21,8 @@ namespace MySingingMonsters
             elems.Add(new Element("Plant"));
             attacks = new List<Attack>();
             attacks.Add(new Attack("Flytrap duet", new Element("None"), 1));
-            attacks.Add(new Attack("Infamous Mug Pot", new Element("None"), 1.21));
-            if (level >= 5) attacks.Add(new Attack("Looping Vine", new Element("Plant"), 1.18));
+            attacks.Add(new Attack("Infamous Mug Pot", new Element("None"), 1.21f));
+            if (level >= 5) attacks.Add(new Attack("Looping Vine", new Element("Plant"), 1.18f));
 
         }
     }

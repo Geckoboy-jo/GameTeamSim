@@ -13,12 +13,19 @@ namespace MySingingMonsters
         public Monster Third;
 
         public Monster Active;
-        Team(Monster first, Monster second, Monster third)
+
+        public bool lost;
+        public Team(Monster First, Monster Second, Monster Third)
         {
-            First = first;
-            Second = second;
-            Third = third;
-            Active = First;
+            this.First = First;
+            this.Second = Second;
+            this.Third = Third;
+            this.Active = First;
+            lost = false;
+        }
+        public List<Monster> getMonsters()
+        {
+            return new List<Monster> { First, Second, Third };
         }
 
     }

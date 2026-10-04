@@ -9,7 +9,7 @@ namespace MySingingMonsters
 {
     internal class PotBelly : Monster
     {
-        public List<Attack> attacks;
+        
 
 
         public PotBelly(int Level)
@@ -22,7 +22,7 @@ namespace MySingingMonsters
             elems.Add(new Element("Plant"));
             attacks = new List<Attack>();
             attacks.Add(new Attack("Flytrap duet", new Element("None"), 1  ));
-            if (level >= 5) attacks.Add(new Attack("Looping Vine", new Element("Plant"), 1.18));
+            if (level >= 5) attacks.Add(new Attack("Looping Vine", new Element("Plant"), 1.18f));
 
         }
     }

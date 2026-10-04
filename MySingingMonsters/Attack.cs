@@ -10,9 +10,9 @@ namespace MySingingMonsters
     {
         public Element type;
         public string name;
-        public double basePower;
+        public float basePower;
 
-        public Attack(string Name, Element Type, double BasePower)
+        public Attack(string Name, Element Type, float BasePower)
         {
             name = Name;
             type = Type;

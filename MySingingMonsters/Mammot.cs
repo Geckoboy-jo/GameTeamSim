@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +8,7 @@ namespace MySingingMonsters
 {
     internal class Mammot : Monster
     {
-        public List<Attack> attacks;
+        
         public Mammot(int Level)
         {
             baseHp = 225;
@@ -19,7 +19,7 @@ namespace MySingingMonsters
             elems.Add(new Element("Cold"));
             attacks = new List<Attack>();
             attacks.Add(new Attack("Hoarse Hollar", new Element("None"), 1));
-            if(level >= 5) attacks.Add(new Attack("Snow Brawl", new Element("Cold"), 1.2));
+            if(level >= 5) attacks.Add(new Attack("Snow Brawl", new Element("Cold"), 1.2f));
 
         }
     }

@@ -1,0 +1,17 @@
+C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\obj\Debug\net8.0-windows\MySingingMonsters.Form1.resources
+C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\obj\Debug\net8.0-windows\MySingingMonsters.csproj.GenerateResource.cache
+C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\obj\Debug\net8.0-windows\MySingingMonsters.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\obj\Debug\net8.0-windows\MySingingMonsters.AssemblyInfoInputs.cache
+C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\obj\Debug\net8.0-windows\MySingingMonsters.AssemblyInfo.cs
+C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\obj\Debug\net8.0-windows\MySingingMonsters.csproj.CoreCompileInputs.cache
+C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\obj\Debug\net8.0-windows\MySingingMonsters.sourcelink.json
+C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\bin\Debug\net8.0-windows\MySingingMonsters.exe
+C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\bin\Debug\net8.0-windows\MySingingMonsters.deps.json
+C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\bin\Debug\net8.0-windows\MySingingMonsters.runtimeconfig.json
+C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\bin\Debug\net8.0-windows\MySingingMonsters.dll
+C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\bin\Debug\net8.0-windows\MySingingMonsters.pdb
+C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\obj\Debug\net8.0-windows\MySingingMonsters.dll
+C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\obj\Debug\net8.0-windows\refint\MySingingMonsters.dll
+C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\obj\Debug\net8.0-windows\MySingingMonsters.pdb
+C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\obj\Debug\net8.0-windows\MySingingMonsters.genruntimeconfig.cache
+C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\obj\Debug\net8.0-windows\ref\MySingingMonsters.dll
