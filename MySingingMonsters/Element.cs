@@ -52,6 +52,7 @@ namespace MySingingMonsters
                     weakTo = "Plasma";
                     break;
                 case "None":
+                case "Seasonal":
                     break;
             }
         }

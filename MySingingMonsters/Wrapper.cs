@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
+using System.Linq; 
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,8 +15,8 @@ namespace MySingingMonsters
         public Team Opononent;
         public Wrapper()
         {
-            Player = new Team(new PotbellySoilsOfSpore(1), new Mammot(1), new MammotBounceCap(1));   
-            Opononent = new Team(new Mammot(20), new PotBelly(5), new MammotOffTheCuffs(20));
+            Player = new Team(new List<Monster> { new Spunge(17), new Thumpies(17) });
+            Opononent = new Team(new List<Monster> { new Mammot(20), new PotBelly(20), new Thumpies(18) });
             
         }
         public string game()
@@ -33,7 +33,7 @@ namespace MySingingMonsters
         {
             float maxDamage = 0;
             Monster? bestMonster = null;
-            foreach (Monster monster in O.getMonsters())
+            foreach (Monster monster in O.Monsters)
             {   
                 if(monster.isAlive == false) continue;
                 foreach (Attack attack in monster.attacks)
@@ -55,8 +55,7 @@ namespace MySingingMonsters
             D.Active.takeDamage(maxDamage);
             if (D.Active.isAlive == false) 
             {
-                List<Monster> defenders = D.getMonsters();
-                foreach (Monster monster in defenders)
+                foreach (Monster monster in D.Monsters)
                 {
                     if(monster.isAlive == true)
                     {
