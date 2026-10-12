@@ -28,26 +28,175 @@ namespace MySingingMonsters
         /// </summary>
         private void InitializeComponent()
         {
+            titleLabel = new Label();
+            subtitleLabel = new Label();
+            teamLabel = new Label();
+            textBox1 = new TextBox();
+            monstersPanel = new Panel();
+            button3 = new Button();
+            button2 = new Button();
+            button1 = new Button();
+            resultPanel = new Panel();
+            resultLabel = new Label();
             winBox = new TextBox();
+            monstersPanel.SuspendLayout();
+            resultPanel.SuspendLayout();
             SuspendLayout();
+            // 
+            // titleLabel
+            // 
+            titleLabel.AutoSize = true;
+            titleLabel.Font = new Font("Segoe UI", 24F, FontStyle.Bold);
+            titleLabel.ForeColor = Color.FromArgb(34, 34, 59);
+            titleLabel.Location = new Point(34, 24);
+            titleLabel.Name = "titleLabel";
+            titleLabel.Size = new Size(420, 45);
+            titleLabel.TabIndex = 0;
+            titleLabel.Text = "My Singing Monsters Sim";
+            // 
+            // subtitleLabel
+            // 
+            subtitleLabel.AutoSize = true;
+            subtitleLabel.Font = new Font("Segoe UI", 10.5F);
+            subtitleLabel.ForeColor = Color.FromArgb(90, 90, 110);
+            subtitleLabel.Location = new Point(38, 74);
+            subtitleLabel.Name = "subtitleLabel";
+            subtitleLabel.Size = new Size(286, 19);
+            subtitleLabel.TabIndex = 1;
+            subtitleLabel.Text = "Build your team and simulate the winner.";
+            // 
+            // teamLabel
+            // 
+            teamLabel.AutoSize = true;
+            teamLabel.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            teamLabel.ForeColor = Color.FromArgb(34, 34, 59);
+            teamLabel.Location = new Point(40, 122);
+            teamLabel.Name = "teamLabel";
+            teamLabel.Size = new Size(86, 20);
+            teamLabel.TabIndex = 2;
+            teamLabel.Text = "Team name";
+            // 
+            // textBox1
+            // 
+            textBox1.BackColor = Color.White;
+            textBox1.BorderStyle = BorderStyle.FixedSingle;
+            textBox1.Font = new Font("Segoe UI", 16F);
+            textBox1.Location = new Point(40, 148);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(520, 36);
+            textBox1.TabIndex = 3;
+            textBox1.Text = "Your Team";
+            textBox1.TextChanged += textBox1_TextChanged;
+            // 
+            // monstersPanel
+            // 
+            monstersPanel.BackColor = Color.White;
+            monstersPanel.Controls.Add(button3);
+            monstersPanel.Controls.Add(button2);
+            monstersPanel.Controls.Add(button1);
+            monstersPanel.Location = new Point(40, 210);
+            monstersPanel.Name = "monstersPanel";
+            monstersPanel.Size = new Size(1288, 260);
+            monstersPanel.TabIndex = 4;
+            // 
+            // button3
+            // 
+            button3.BackColor = Color.FromArgb(108, 92, 231);
+            button3.FlatAppearance.BorderSize = 0;
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            button3.ForeColor = Color.White;
+            button3.Location = new Point(866, 28);
+            button3.Name = "button3";
+            button3.Size = new Size(380, 200);
+            button3.TabIndex = 2;
+            button3.Text = "Select Monster";
+            button3.UseVisualStyleBackColor = false;
+            // 
+            // button2
+            // 
+            button2.BackColor = Color.FromArgb(0, 184, 148);
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            button2.ForeColor = Color.White;
+            button2.Location = new Point(443, 28);
+            button2.Name = "button2";
+            button2.Size = new Size(380, 200);
+            button2.TabIndex = 1;
+            button2.Text = "Select Monster...";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.FromArgb(255, 118, 117);
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(20, 28);
+            button1.Name = "button1";
+            button1.Size = new Size(380, 200);
+            button1.TabIndex = 0;
+            button1.Text = "Select Monster...";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
+            // resultPanel
+            // 
+            resultPanel.BackColor = Color.FromArgb(245, 246, 250);
+            resultPanel.Controls.Add(resultLabel);
+            resultPanel.Controls.Add(winBox);
+            resultPanel.Location = new Point(40, 500);
+            resultPanel.Name = "resultPanel";
+            resultPanel.Size = new Size(1288, 170);
+            resultPanel.TabIndex = 5;
+            // 
+            // resultLabel
+            // 
+            resultLabel.AutoSize = true;
+            resultLabel.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            resultLabel.ForeColor = Color.FromArgb(34, 34, 59);
+            resultLabel.Location = new Point(24, 22);
+            resultLabel.Name = "resultLabel";
+            resultLabel.Size = new Size(52, 20);
+            resultLabel.TabIndex = 0;
+            resultLabel.Text = "Result";
             // 
             // winBox
             // 
-            winBox.Font = new Font("Segoe UI", 50F);
-            winBox.Location = new Point(380, 307);
+            winBox.BackColor = Color.White;
+            winBox.BorderStyle = BorderStyle.None;
+            winBox.Font = new Font("Segoe UI", 24F, FontStyle.Bold);
+            winBox.ForeColor = Color.FromArgb(45, 52, 54);
+            winBox.Location = new Point(24, 58);
             winBox.Name = "winBox";
-            winBox.Size = new Size(820, 96);
-            winBox.TabIndex = 0;
-            winBox.Text = "winner is";
+            winBox.ReadOnly = true;
+            winBox.Size = new Size(1230, 43);
+            winBox.TabIndex = 1;
+            winBox.Text = "Winner is...";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1604, 822);
-            Controls.Add(winBox);
+            BackColor = Color.FromArgb(240, 242, 245);
+            ClientSize = new Size(1370, 749);
+            Controls.Add(resultPanel);
+            Controls.Add(monstersPanel);
+            Controls.Add(textBox1);
+            Controls.Add(teamLabel);
+            Controls.Add(subtitleLabel);
+            Controls.Add(titleLabel);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "Form1";
-            Text = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "My Singing Monsters";
+            monstersPanel.ResumeLayout(false);
+            resultPanel.ResumeLayout(false);
+            resultPanel.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -55,5 +204,15 @@ namespace MySingingMonsters
         #endregion
 
         public TextBox winBox;
+        private TextBox textBox1;
+        private Button button1;
+        private Button button2;
+        private Button button3;
+        private Label titleLabel;
+        private Label subtitleLabel;
+        private Label teamLabel;
+        private Panel monstersPanel;
+        private Panel resultPanel;
+        private Label resultLabel;
     }
 }

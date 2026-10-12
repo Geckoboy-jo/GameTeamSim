@@ -1,0 +1,110 @@
+﻿namespace MySingingMonsters
+{
+    partial class Form1
+    {
+        /// <summary>
+        ///  Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        ///  Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        ///  Required method for Designer support - do not modify
+        ///  the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            winBox = new TextBox();
+            textBox1 = new TextBox();
+            button1 = new Button();
+            button2 = new Button();
+            button3 = new Button();
+            SuspendLayout();
+            // 
+            // winBox
+            // 
+            winBox.Font = new Font("Segoe UI", 50F);
+            winBox.Location = new Point(383, 485);
+            winBox.Name = "winBox";
+            winBox.Size = new Size(820, 96);
+            winBox.TabIndex = 0;
+            winBox.Text = "winner is";
+            // 
+            // textBox1
+            // 
+            textBox1.Font = new Font("Segoe UI", 50F);
+            textBox1.Location = new Point(40, 4);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(810, 96);
+            textBox1.TabIndex = 1;
+            textBox1.Text = "Your Team";
+            textBox1.TextChanged += textBox1_TextChanged;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(51, 116);
+            button1.Name = "button1";
+            button1.Size = new Size(446, 297);
+            button1.TabIndex = 2;
+            button1.Text = "Select Monster...";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(514, 111);
+            button2.Name = "button2";
+            button2.Size = new Size(467, 301);
+            button2.TabIndex = 3;
+            button2.Text = "Select Monster...";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(995, 101);
+            button3.Name = "button3";
+            button3.Size = new Size(363, 308);
+            button3.TabIndex = 4;
+            button3.Text = "Select Monster";
+            button3.UseVisualStyleBackColor = true;
+            // 
+            // Form1
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1370, 749);
+            Controls.Add(button3);
+            Controls.Add(button2);
+            Controls.Add(button1);
+            Controls.Add(textBox1);
+            Controls.Add(winBox);
+            Name = "Form1";
+            Text = "Form1";
+            ResumeLayout(false);
+            PerformLayout();
+        }
+
+        #endregion
+
+        public TextBox winBox;
+        private TextBox textBox1;
+        private Button button1;
+        private Button button2;
+        private Button button3;
+    }
+}
