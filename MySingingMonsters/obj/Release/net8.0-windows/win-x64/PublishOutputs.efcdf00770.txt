@@ -1,0 +1,2 @@
+C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\publish\MSMBattleSim\MSMBattleSim.pdb
+C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\publish\MSMBattleSim\MSMBattleSim.exe

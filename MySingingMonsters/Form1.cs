@@ -23,6 +23,8 @@ namespace MySingingMonsters
 
         private sealed record GauntletSettings(
             int MaxBeds,
+            int MaxMonsters,
+            int RequiredNumElements,
             string[] AllowedElements,
             bool NaturalOnly,
             bool EtherealOnly,
@@ -109,7 +111,7 @@ namespace MySingingMonsters
             {
                 var progress = new Progress<string>(message => winBox.Text = message);
                 var result = await Task.Run(() => gauntlet.CalculateBestTeam(
-                    settings.MaxBeds, settings.AllowDuplicates, progress));
+                    settings.MaxBeds, settings.MaxMonsters, settings.AllowDuplicates, progress));
 
                 string[] teamNames = result.Teams
                     .Select((team, index) =>
@@ -236,6 +238,8 @@ namespace MySingingMonsters
         private static void ApplyGauntletSettings(Gauntlet gauntlet, GauntletSettings settings)
         {
             gauntlet.maxBeds = settings.MaxBeds;
+            gauntlet.maxMonsters = settings.MaxMonsters;
+            gauntlet.requiredNumElements = settings.RequiredNumElements;
             gauntlet.allowedElements = settings.AllowedElements.Length == 0
                 ? null
                 : new HashSet<string>(settings.AllowedElements, StringComparer.OrdinalIgnoreCase);
@@ -255,7 +259,7 @@ namespace MySingingMonsters
                 Text = title,
                 StartPosition = FormStartPosition.CenterParent,
                 FormBorderStyle = FormBorderStyle.FixedDialog,
-                ClientSize = new Size(440, 510),
+                ClientSize = new Size(440, 600),
                 MinimizeBox = false,
                 MaximizeBox = false
             };
@@ -269,29 +273,47 @@ namespace MySingingMonsters
                 Value = 20,
                 Width = 200
             };
-            var playerLevelLabel = new Label { AutoSize = true, Location = new Point(18, 58), Text = "Player level cap:" };
-            var playerLevelInput = new NumericUpDown
+            var maxMonstersLabel = new Label { AutoSize = true, Location = new Point(18, 58), Text = "Max number of monsters:" };
+            var maxMonstersInput = new NumericUpDown
             {
                 Location = new Point(190, 54),
-                Maximum = 20,
+                Maximum = 3,
                 Minimum = 1,
-                Value = 20,
+                Value = 3,
                 Width = 200
             };
-            var opponentLevelLabel = new Label { AutoSize = true, Location = new Point(18, 96), Text = "Opponent level cap:" };
-            var opponentLevelInput = new NumericUpDown
+            var elementCountLabel = new Label { AutoSize = true, Location = new Point(18, 96), Text = "Elements per monster (0 = any):" };
+            var elementCountInput = new NumericUpDown
             {
                 Location = new Point(190, 92),
+                Maximum = 4,
+                Minimum = 0,
+                Value = 0,
+                Width = 200
+            };
+            var playerLevelLabel = new Label { AutoSize = true, Location = new Point(18, 134), Text = "Player level cap:" };
+            var playerLevelInput = new NumericUpDown
+            {
+                Location = new Point(190, 130),
                 Maximum = 20,
                 Minimum = 1,
                 Value = 20,
                 Width = 200
             };
-            var categoryLabel = new Label { AutoSize = true, Location = new Point(18, 134), Text = "Monster category:" };
+            var opponentLevelLabel = new Label { AutoSize = true, Location = new Point(18, 172), Text = "Opponent level cap:" };
+            var opponentLevelInput = new NumericUpDown
+            {
+                Location = new Point(190, 168),
+                Maximum = 20,
+                Minimum = 1,
+                Value = 20,
+                Width = 200
+            };
+            var categoryLabel = new Label { AutoSize = true, Location = new Point(18, 210), Text = "Monster category:" };
             var categoryInput = new ComboBox
             {
                 DropDownStyle = ComboBoxStyle.DropDownList,
-                Location = new Point(190, 130),
+                Location = new Point(190, 206),
                 Width = 200
             };
             categoryInput.Items.AddRange(new object[] { "Any", "Natural only", "Ethereal only" });
@@ -300,21 +322,21 @@ namespace MySingingMonsters
             var elementsLabel = new Label
             {
                 AutoSize = true,
-                Location = new Point(18, 170),
+                Location = new Point(18, 246),
                 Text = "Required elements (each selected element must be present):"
             };
             var elementsInput = new CheckedListBox
             {
                 CheckOnClick = true,
-                Location = new Point(18, 194),
-                Size = new Size(404, 237)
+                Location = new Point(18, 270),
+                Size = new Size(404, 235)
             };
             elementsInput.Items.AddRange(ElementNames.Cast<object>().ToArray());
 
             var allowDuplicatesInput = new CheckBox
             {
                 AutoSize = true,
-                Location = new Point(18, 438),
+                Location = new Point(18, 512),
                 Text = "Allow duplicate species (costumes count as their base)"
             };
 
@@ -322,20 +344,21 @@ namespace MySingingMonsters
             {
                 Text = "OK",
                 DialogResult = DialogResult.OK,
-                Location = new Point(256, 458),
+                Location = new Point(256, 550),
                 Size = new Size(78, 32)
             };
             var cancelButton = new Button
             {
                 Text = "Cancel",
                 DialogResult = DialogResult.Cancel,
-                Location = new Point(344, 458),
+                Location = new Point(344, 550),
                 Size = new Size(78, 32)
             };
 
             dialog.Controls.AddRange(new Control[]
             {
-                bedsLabel, bedsInput, playerLevelLabel, playerLevelInput, opponentLevelLabel, opponentLevelInput,
+                bedsLabel, bedsInput, maxMonstersLabel, maxMonstersInput, elementCountLabel, elementCountInput,
+                playerLevelLabel, playerLevelInput, opponentLevelLabel, opponentLevelInput,
                 categoryLabel, categoryInput,
                 elementsLabel, elementsInput, okButton, cancelButton
             });
@@ -354,6 +377,8 @@ namespace MySingingMonsters
             string[] allowedElements = elementsInput.CheckedItems.Cast<string>().ToArray();
             return new GauntletSettings(
                 decimal.ToInt32(bedsInput.Value),
+                decimal.ToInt32(maxMonstersInput.Value),
+                decimal.ToInt32(elementCountInput.Value),
                 allowedElements,
                 categoryInput.SelectedIndex == 1,
                 categoryInput.SelectedIndex == 2,

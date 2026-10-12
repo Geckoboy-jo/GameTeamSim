@@ -33,6 +33,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{265D8D99-FD85-C7E5-29A5-D6FA1C336305}|MySingingMonsters.csproj|c:\\users\\midge\\source\\repos\\gameteamsim\\mysingingmonsters\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{265D8D99-FD85-C7E5-29A5-D6FA1C336305}|MySingingMonsters.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{265D8D99-FD85-C7E5-29A5-D6FA1C336305}|MySingingMonsters.csproj|c:\\users\\midge\\source\\repos\\gameteamsim\\mysingingmonsters\\mysingingmonsters.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{265D8D99-FD85-C7E5-29A5-D6FA1C336305}|MySingingMonsters.csproj|solutionrelative:mysingingmonsters.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,11 +46,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "MySingingMonsters.csproj",
+              "DocumentMoniker": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\MySingingMonsters\\MySingingMonsters.csproj",
+              "RelativeDocumentMoniker": "MySingingMonsters.csproj",
+              "ToolTip": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\MySingingMonsters\\MySingingMonsters.csproj",
+              "RelativeToolTip": "MySingingMonsters.csproj",
+              "ViewState": "AgIAAAUAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-10-12T20:42:47.756Z"
             },
             {
               "$type": "Document",
@@ -58,8 +74,7 @@
               "RelativeToolTip": "Quarrister.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-12T18:39:56.473Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-12T18:39:56.473Z"
             },
             {
               "$type": "Document",
@@ -71,8 +86,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-12T18:02:17.98Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-12T18:02:17.98Z"
             },
             {
               "$type": "Document",
@@ -84,8 +98,7 @@
               "RelativeToolTip": "Monster.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-12T17:58:39.614Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-12T17:58:39.614Z"
             },
             {
               "$type": "Document",
@@ -95,10 +108,9 @@
               "RelativeDocumentMoniker": "Gauntlet.cs",
               "ToolTip": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\MySingingMonsters\\Gauntlet.cs",
               "RelativeToolTip": "Gauntlet.cs",
-              "ViewState": "AgIAAEQAAAAAAAAAAAAlwAMAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAIMAAAAAAAAAAIBJwAMAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-12T16:37:07.278Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-12T16:37:07.278Z"
             },
             {
               "$type": "Document",
@@ -110,8 +122,7 @@
               "RelativeToolTip": "Form1.Designer.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAAABYAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-12T16:30:29.302Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-12T16:30:29.302Z"
             },
             {
               "$type": "Document",
@@ -123,8 +134,7 @@
               "RelativeToolTip": "Wrapper.cs",
               "ViewState": "AgIAAJsAAAAAAAAAAAAuwDcAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-12T16:27:28.26Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-12T16:27:28.26Z"
             },
             {
               "$type": "Document",
@@ -134,7 +144,7 @@
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\MySingingMonsters\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAIA3wF0CAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABkAAAAAAAAAAIBJwHYCAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-10-12T16:24:59.92Z",
               "EditorCaption": ""

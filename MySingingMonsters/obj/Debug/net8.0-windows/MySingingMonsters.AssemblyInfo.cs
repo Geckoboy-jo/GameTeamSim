@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("MySingingMonsters")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("MSMBattleSim")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9ccfdeca7e19999f5a297aced029f1b3664e30da")]
-[assembly: System.Reflection.AssemblyProductAttribute("MySingingMonsters")]
-[assembly: System.Reflection.AssemblyTitleAttribute("MySingingMonsters")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+13de490c93d2ad77978333d09065ab43bd6c8f3b")]
+[assembly: System.Reflection.AssemblyProductAttribute("MSMBattleSim")]
+[assembly: System.Reflection.AssemblyTitleAttribute("MSMBattleSim")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 [assembly: System.Runtime.Versioning.TargetPlatformAttribute("Windows7.0")]
 [assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Windows7.0")]

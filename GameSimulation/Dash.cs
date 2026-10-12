@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace GameSimulation
 {
-    public class Dash : Ability
+    internal class Dash : Ability
     {
-        Dash()
+        internal Dash()
         {
             diceCost = 1;
             attackType = "burst";

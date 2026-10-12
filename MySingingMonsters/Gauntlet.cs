@@ -130,6 +130,7 @@ namespace MySingingMonsters
 
         public (List<List<Type>> Teams, int WavesCleared, long TeamsEvaluated) CalculateBestTeam(
             int teamMaxBeds,
+            int maxTeamMonsters,
             bool allowDuplicates,
             IProgress<string>? progress = null)
         {
@@ -139,6 +140,11 @@ namespace MySingingMonsters
             if (teamMaxBeds < 1)
             {
                 throw new ArgumentOutOfRangeException(nameof(teamMaxBeds), "Team bed capacity must be at least one.");
+            }
+
+            if (maxTeamMonsters < 1 || maxTeamMonsters > 3)
+            {
+                throw new ArgumentOutOfRangeException(nameof(maxTeamMonsters), "Team size must be between one and three monsters.");
             }
 
             Type[] monsterTypes = typeof(Monster).Assembly.GetTypes()
@@ -190,7 +196,7 @@ namespace MySingingMonsters
                     }
                 }
 
-                if (selectedTypes.Count == 3)
+                if (selectedTypes.Count == maxTeamMonsters)
                 {
                     return;
                 }
