@@ -1,13 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5D5F1agpLak=",
+  "dgSpecHash": "vfppqfAR6oA=",
   "success": true,
   "projectFilePath": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\MySingingMonsters\\MySingingMonsters.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\midge\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.31\\microsoft.net.illink.tasks.8.0.31.nupkg.sha512",
-    "C:\\Users\\midge\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\8.0.31\\microsoft.netcore.app.runtime.win-x64.8.0.31.nupkg.sha512",
-    "C:\\Users\\midge\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\8.0.31\\microsoft.windowsdesktop.app.runtime.win-x64.8.0.31.nupkg.sha512",
-    "C:\\Users\\midge\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\8.0.31\\microsoft.aspnetcore.app.runtime.win-x64.8.0.31.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }

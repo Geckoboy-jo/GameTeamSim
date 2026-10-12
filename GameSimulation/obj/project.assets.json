@@ -2,14 +2,14 @@
   "version": 3,
   "targets": {
     "net8.0-windows7.0": {
-      "MySingingMonsters/1.0.0": {
+      "MSMBattleSim/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "compile": {
-          "bin/placeholder/MySingingMonsters.dll": {}
+          "bin/placeholder/MSMBattleSim.dll": {}
         },
         "runtime": {
-          "bin/placeholder/MySingingMonsters.dll": {}
+          "bin/placeholder/MSMBattleSim.dll": {}
         },
         "frameworkReferences": [
           "Microsoft.WindowsDesktop.App.WindowsForms"
@@ -18,7 +18,7 @@
     }
   },
   "libraries": {
-    "MySingingMonsters/1.0.0": {
+    "MSMBattleSim/1.0.0": {
       "type": "project",
       "path": "../MySingingMonsters/MySingingMonsters.csproj",
       "msbuildProject": "../MySingingMonsters/MySingingMonsters.csproj"
@@ -26,7 +26,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0-windows7.0": [
-      "MySingingMonsters >= 1.0.0"
+      "MSMBattleSim >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -36,11 +36,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\midge\\Documents\\GitHub\\gameTeam\\GameTeamSim\\GameSimulation\\GameSimulation.csproj",
+      "projectUniqueName": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\GameSimulation.csproj",
       "projectName": "GameSimulation",
-      "projectPath": "C:\\Users\\midge\\Documents\\GitHub\\gameTeam\\GameTeamSim\\GameSimulation\\GameSimulation.csproj",
+      "projectPath": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\GameSimulation.csproj",
       "packagesPath": "C:\\Users\\midge\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\midge\\Documents\\GitHub\\gameTeam\\GameTeamSim\\GameSimulation\\obj\\",
+      "outputPath": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\GameSimulation\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -61,8 +61,8 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "C:\\Users\\midge\\Documents\\GitHub\\gameTeam\\GameTeamSim\\MySingingMonsters\\MySingingMonsters.csproj": {
-              "projectPath": "C:\\Users\\midge\\Documents\\GitHub\\gameTeam\\GameTeamSim\\MySingingMonsters\\MySingingMonsters.csproj"
+            "C:\\Users\\midge\\source\\repos\\GameTeamSim\\MySingingMonsters\\MySingingMonsters.csproj": {
+              "projectPath": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\MySingingMonsters\\MySingingMonsters.csproj"
             }
           }
         }
@@ -101,7 +101,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.318/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

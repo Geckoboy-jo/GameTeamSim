@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MSMBattleSim")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+13de490c93d2ad77978333d09065ab43bd6c8f3b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c3a5f9c529b1ef709f03e0a5c3e410f24133d344")]
 [assembly: System.Reflection.AssemblyProductAttribute("MSMBattleSim")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MSMBattleSim")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

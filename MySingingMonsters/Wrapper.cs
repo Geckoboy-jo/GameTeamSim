@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq; 
@@ -12,6 +13,12 @@ namespace MySingingMonsters
     internal class Wrapper
     {
         private sealed record MonsterOption(Type Type, string[] Elements, bool IsNatural, bool IsEthereal);
+        private readonly record struct MonsterFilterKey(
+            string ContainsElement,
+            bool NaturalOnly,
+            bool EtherealOnly,
+            int RequiredElementCount,
+            string AllowedElements);
 
         private static readonly MonsterOption[] MonsterOptions = typeof(Monster).Assembly.GetTypes()
             .Where(type => type.IsClass && !type.IsAbstract &&
@@ -27,6 +34,7 @@ namespace MySingingMonsters
                     monster.elems.All(element => element.isEtherial));
             })
             .ToArray();
+        private static readonly ConcurrentDictionary<MonsterFilterKey, MonsterOption[]> MonsterOptionsByFilter = new();
 
         public Team Player;
         public Team Opononent;
@@ -179,25 +187,41 @@ namespace MySingingMonsters
         {
             ArgumentNullException.ThrowIfNull(contains);
 
-            MonsterOption[] candidates = MonsterOptions
-                .Where(option =>
-                    (!natOnly || option.IsNatural) &&
-                    (!ethOnly || option.IsEthereal) &&
-                    (requiredElementCount == 0 || option.Elements.Length == requiredElementCount) &&
-                    (allowedElements is null || allowedElements.All(allowed =>
-                        option.Elements.Contains(allowed, StringComparer.OrdinalIgnoreCase))))
-                .ToArray();
-
-            if (!string.Equals(contains.name, "None", StringComparison.OrdinalIgnoreCase))
+            string normalizedAllowedElements = allowedElements is null
+                ? string.Empty
+                : string.Join("\u001f", allowedElements
+                    .Select(element => element.ToUpperInvariant())
+                    .OrderBy(element => element, StringComparer.Ordinal));
+            var filterKey = new MonsterFilterKey(
+                contains.name.ToUpperInvariant(),
+                natOnly,
+                ethOnly,
+                requiredElementCount,
+                normalizedAllowedElements);
+            MonsterOption[] candidates = MonsterOptionsByFilter.GetOrAdd(filterKey, _ =>
             {
-                MonsterOption[] matchingElement = candidates
-                    .Where(option => option.Elements.Contains(contains.name, StringComparer.OrdinalIgnoreCase))
+                MonsterOption[] filtered = MonsterOptions
+                    .Where(option =>
+                        (!natOnly || option.IsNatural) &&
+                        (!ethOnly || option.IsEthereal) &&
+                        (requiredElementCount == 0 || option.Elements.Length == requiredElementCount) &&
+                        (allowedElements is null || allowedElements.All(allowed =>
+                            option.Elements.Contains(allowed, StringComparer.OrdinalIgnoreCase))))
                     .ToArray();
-                if (matchingElement.Length > 0)
+
+                if (!string.Equals(contains.name, "None", StringComparison.OrdinalIgnoreCase))
                 {
-                    candidates = matchingElement;
+                    MonsterOption[] matchingElement = filtered
+                        .Where(option => option.Elements.Contains(contains.name, StringComparer.OrdinalIgnoreCase))
+                        .ToArray();
+                    if (matchingElement.Length > 0)
+                    {
+                        filtered = matchingElement;
+                    }
                 }
-            }
+
+                return filtered;
+            });
 
             if (candidates.Length == 0)
             {

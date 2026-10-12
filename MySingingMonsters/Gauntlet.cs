@@ -10,6 +10,8 @@ namespace MySingingMonsters
 {
     internal class Gauntlet
     {
+        private readonly record struct TeamCombination(int First, int Second, int Third, int Count);
+
         public Team PlayerTeam;
        
         public Element contains;
@@ -168,14 +170,40 @@ namespace MySingingMonsters
             }
 
             List<Type> selectedTypes = new();
+            List<int> selectedCandidateIndices = new();
             var selectedSpecies = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            var evaluatedCombinations = new HashSet<TeamCombination>();
             var bestTeams = new List<List<Type>>();
             int bestWaves = -1;
             long teamsEvaluated = 0;
 
+            TeamCombination CreateCombinationKey()
+            {
+                int first = selectedCandidateIndices[0];
+                int second = selectedCandidateIndices.Count > 1 ? selectedCandidateIndices[1] : 0;
+                int third = selectedCandidateIndices.Count > 2 ? selectedCandidateIndices[2] : 0;
+
+                if (second < first)
+                {
+                    (first, second) = (second, first);
+                }
+
+                if (third < second)
+                {
+                    (second, third) = (third, second);
+                }
+
+                if (second < first)
+                {
+                    (first, second) = (second, first);
+                }
+
+                return new TeamCombination(first, second, third, selectedCandidateIndices.Count);
+            }
+
             void SearchCombinations(int startIndex, int bedsUsed)
             {
-                if (selectedTypes.Count > 0)
+                if (selectedTypes.Count > 0 && evaluatedCombinations.Add(CreateCombinationKey()))
                 {
                     int waves = EvaluateTeam(selectedTypes, maximumWaves, maximumLosses);
                     teamsEvaluated++;
@@ -216,9 +244,11 @@ namespace MySingingMonsters
                     }
 
                     selectedTypes.Add(candidate.Type);
+                    selectedCandidateIndices.Add(index);
                     bool addedSpecies = selectedSpecies.Add(candidate.Species);
                     SearchCombinations(allowDuplicates ? index : index + 1, nextBeds);
                     selectedTypes.RemoveAt(selectedTypes.Count - 1);
+                    selectedCandidateIndices.RemoveAt(selectedCandidateIndices.Count - 1);
                     if (addedSpecies)
                     {
                         selectedSpecies.Remove(candidate.Species);
