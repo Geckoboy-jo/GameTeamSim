@@ -10,12 +10,13 @@ namespace MySingingMonsters
     {
         public string name;
         public string weakTo;
-
+        public bool isEtherial;
         public Element(string Name)
         {
             name = Name;
             initlizeWeaknessess(name);
-             
+            if(name == "Plasma" || name == "Shadow" || name == "Mech" || name == "Crystal" || name == "Poison")
+            {isEtherial = true;}
         }
         public void initlizeWeaknessess(string name)
         {

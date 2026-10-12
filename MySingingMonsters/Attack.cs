@@ -11,12 +11,13 @@ namespace MySingingMonsters
         public Element type;
         public string name;
         public float basePower;
-
+        public int timesUsed;
         public Attack(string Name, Element Type, float BasePower)
         {
             name = Name;
             type = Type;
             basePower = BasePower;  
+            timesUsed = 0;
         }
     }
 }

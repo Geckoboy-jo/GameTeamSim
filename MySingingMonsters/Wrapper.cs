@@ -85,8 +85,40 @@ namespace MySingingMonsters
                     else if (D.elems.Count == 3) multiplier = multiplier * 0.75f;
                     else if (D.elems.Count == 4) multiplier = multiplier * 0.8f;
                 }
+                A.timesUsed++;
+                
             }
-            return multiplier * O.Attack * A.basePower;
+            float damage =  multiplier * O.Attack * A.basePower;
+            if(A.type.isEtherial == true)
+            {
+                O.heal(calculateHealing(A, damage));
+            }
+            return damage;
+        }
+        public float calculateHealing(Attack A, float damage)
+        {
+            if(A.timesUsed == 1)
+            {
+                return damage * 0.75f; // Example: 10% of the damage dealt as healing
+            }
+            else if(A.timesUsed == 2)
+            {
+                return damage * 0.6f; // Example: 5% of the damage dealt as healing
+            }
+            else if(A.timesUsed == 3)
+            {
+                return damage * 0.45f; // Example: 5% of the damage dealt as healing
+            }
+            else if(A.timesUsed == 4)
+            {
+                return damage * 0.3f; // Example: 5% of the damage dealt as healing
+            }
+            else if(A.timesUsed == 5)
+                return damage * 0.15f; // No healing for subsequent uses
+            else 
+            {
+                return 0; // No healing for subsequent uses
+            }
         }
     }
 }
