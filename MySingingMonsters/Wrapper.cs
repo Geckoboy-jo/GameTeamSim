@@ -11,23 +11,56 @@ namespace MySingingMonsters
 {
     internal class Wrapper
     {
+        private sealed record MonsterOption(Type Type, string[] Elements, bool IsNatural, bool IsEthereal);
+
+        private static readonly MonsterOption[] MonsterOptions = typeof(Monster).Assembly.GetTypes()
+            .Where(type => type.IsClass && !type.IsAbstract &&
+                typeof(Monster).IsAssignableFrom(type) &&
+                type.GetConstructor(new[] { typeof(int) }) is not null)
+            .Select(type =>
+            {
+                var monster = (Monster)Activator.CreateInstance(type, 20)!;
+                return new MonsterOption(
+                    type,
+                    monster.elems.Select(element => element.name).ToArray(),
+                    monster.elems.All(element => !element.isEtherial),
+                    monster.elems.All(element => element.isEtherial));
+            })
+            .ToArray();
+
         public Team Player;
         public Team Opononent;
         public Wrapper()
         {
-            Player = new Team(new List<Monster> { new Spunge(17), new Thumpies(17) });
+            Player = new Team(new List<Monster> { new Spunge(17), new Thumpies(17) });  
             Opononent = new Team(new List<Monster> { new Mammot(20), new PotBelly(20), new Thumpies(18) });
             
         }
-        public string game()
+
+
+        public Wrapper(List<Monster> playerMonsters, List<Monster> opponentMonsters)
         {
+            Player = new Team(playerMonsters);
+            Opononent = new Team(opponentMonsters);
+        }
+
+        public bool game()
+        {
+            foreach (Monster monster in Player.Monsters)
+            {
+                monster.HP = monster.baseHp;
+            }
+            foreach (Monster monster in Opononent.Monsters)
+            {
+                monster.HP = monster.baseHp;
+            }
             while (Player.lost == false && Opononent.lost == false)
             {
                 turn(Player, Opononent);
                 if (Opononent.lost == true) break;
                 turn(Opononent, Player);
             }
-            return Player.lost ? "You lost" : "You won";
+            return Player.lost ? false : true;
         }
         public void turn(Team O, Team D)
         {
@@ -119,6 +152,60 @@ namespace MySingingMonsters
             {
                 return 0; // No healing for subsequent uses
             }
+        }
+        public Monster getRandomMonster(int level)
+        {
+            return getRandomMonster(level, new Element("None"), false, false, 0);
+        }
+
+        public Monster getRandomMonster(
+            Element contains,
+            bool natOnly,
+            bool ethOnly,
+            int requiredElementCount = 0,
+            IReadOnlyCollection<string>? allowedElements = null,
+            int? level = null)
+        {
+            return getRandomMonster(level ?? Player.Active.level, contains, natOnly, ethOnly, requiredElementCount, allowedElements);
+        }
+
+        private static Monster getRandomMonster(
+            int level,
+            Element contains,
+            bool natOnly,
+            bool ethOnly,
+            int requiredElementCount,
+            IReadOnlyCollection<string>? allowedElements = null)
+        {
+            ArgumentNullException.ThrowIfNull(contains);
+
+            MonsterOption[] candidates = MonsterOptions
+                .Where(option =>
+                    (!natOnly || option.IsNatural) &&
+                    (!ethOnly || option.IsEthereal) &&
+                    (requiredElementCount == 0 || option.Elements.Length == requiredElementCount) &&
+                    (allowedElements is null || allowedElements.All(allowed =>
+                        option.Elements.Contains(allowed, StringComparer.OrdinalIgnoreCase))))
+                .ToArray();
+
+            if (!string.Equals(contains.name, "None", StringComparison.OrdinalIgnoreCase))
+            {
+                MonsterOption[] matchingElement = candidates
+                    .Where(option => option.Elements.Contains(contains.name, StringComparer.OrdinalIgnoreCase))
+                    .ToArray();
+                if (matchingElement.Length > 0)
+                {
+                    candidates = matchingElement;
+                }
+            }
+
+            if (candidates.Length == 0)
+            {
+                throw new InvalidOperationException("No monsters match the requested category and element-count filters.");
+            }
+
+            MonsterOption selected = candidates[Random.Shared.Next(candidates.Length)];
+            return (Monster)Activator.CreateInstance(selected.Type, level)!;
         }
     }
 }

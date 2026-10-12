@@ -1,0 +1,124 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq; 
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace MySingingMonsters
+{
+    internal class Wrapper
+    {
+        public Team Player;
+        public Team Opononent;
+        public Wrapper()
+        {
+            Player = new Team(new List<Monster> { new Spunge(17), new Thumpies(17) });
+            Opononent = new Team(new List<Monster> { new Mammot(20), new PotBelly(20), new Thumpies(18) });
+            
+        }
+        public string game()
+        {
+            while (Player.lost == false && Opononent.lost == false)
+            {
+                turn(Player, Opononent);
+                if (Opononent.lost == true) break;
+                turn(Opononent, Player);
+            }
+            return Player.lost ? "You lost" : "You won";
+        }
+        public void turn(Team O, Team D)
+        {
+            float maxDamage = 0;
+            Monster? bestMonster = null;
+            foreach (Monster monster in O.Monsters)
+            {   
+                if(monster.isAlive == false) continue;
+                foreach (Attack attack in monster.attacks)
+                {
+                    float damage = calculateDamage(monster, attack, D.Active);
+                    if(damage > maxDamage)
+                    {
+                        maxDamage = damage;
+                        bestMonster = monster;
+                    }
+                }
+            }
+            if (bestMonster is null)
+            {
+                O.lost = true;
+                return;
+            }
+            O.Active = bestMonster;
+            D.Active.takeDamage(maxDamage);
+            if (D.Active.isAlive == false) 
+            {
+                foreach (Monster monster in D.Monsters)
+                {
+                    if(monster.isAlive == true)
+                    {
+                        D.Active = monster;
+                        return;
+                    }
+                }
+                D.lost = true;
+            } 
+        }
+        public float calculateDamage(Monster O, Attack A, Monster D)
+        {
+            float multiplier = 1;
+            foreach (Element element in D.elems)
+            {
+                if (A.type.name == element.weakTo)
+                {
+                    if (D.elems.Count == 1) multiplier = multiplier * 2;
+                    else if (D.elems.Count == 2) multiplier = multiplier * 1.5f;
+                    else if (D.elems.Count == 3) multiplier = multiplier * 1.33f;
+                    else if (D.elems.Count == 4) multiplier = multiplier * 1.25f;
+                }
+                if(A.type.weakTo == element.name)
+                {
+                    if (D.elems.Count == 1) multiplier = multiplier * 0.5f;
+                    else if (D.elems.Count == 2) multiplier = multiplier * 0.66f;
+                    else if (D.elems.Count == 3) multiplier = multiplier * 0.75f;
+                    else if (D.elems.Count == 4) multiplier = multiplier * 0.8f;
+                }
+                A.timesUsed++;
+                
+            }
+            float damage =  multiplier * O.Attack * A.basePower;
+            if(A.type.isEtherial == true)
+            {
+                O.heal(calculateHealing(A, damage));
+            }
+            return damage;
+        }
+        public float calculateHealing(Attack A, float damage)
+        {
+            if(A.timesUsed == 1)
+            {
+                return damage * 0.75f; // Example: 10% of the damage dealt as healing
+            }
+            else if(A.timesUsed == 2)
+            {
+                return damage * 0.6f; // Example: 5% of the damage dealt as healing
+            }
+            else if(A.timesUsed == 3)
+            {
+                return damage * 0.45f; // Example: 5% of the damage dealt as healing
+            }
+            else if(A.timesUsed == 4)
+            {
+                return damage * 0.3f; // Example: 5% of the damage dealt as healing
+            }
+            else if(A.timesUsed == 5)
+                return damage * 0.15f; // No healing for subsequent uses
+            else 
+            {
+                return 0; // No healing for subsequent uses
+            }
+        }
+    }
+}

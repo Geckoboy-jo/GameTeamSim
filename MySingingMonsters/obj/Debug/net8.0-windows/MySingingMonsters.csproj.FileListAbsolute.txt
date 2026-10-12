@@ -32,3 +32,8 @@ C:\Users\midge\Documents\GitHub\gameTeam\GameTeamSim\MySingingMonsters\obj\Debug
 C:\Users\midge\Documents\GitHub\gameTeam\GameTeamSim\MySingingMonsters\obj\Debug\net8.0-windows\MySingingMonsters.pdb
 C:\Users\midge\Documents\GitHub\gameTeam\GameTeamSim\MySingingMonsters\obj\Debug\net8.0-windows\MySingingMonsters.genruntimeconfig.cache
 C:\Users\midge\Documents\GitHub\gameTeam\GameTeamSim\MySingingMonsters\obj\Debug\net8.0-windows\ref\MySingingMonsters.dll
+C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\bin\GauntletValidation\MySingingMonsters.exe
+C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\bin\GauntletValidation\MySingingMonsters.deps.json
+C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\bin\GauntletValidation\MySingingMonsters.runtimeconfig.json
+C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\bin\GauntletValidation\MySingingMonsters.dll
+C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\bin\GauntletValidation\MySingingMonsters.pdb

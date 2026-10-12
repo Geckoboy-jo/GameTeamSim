@@ -1,0 +1,309 @@
+﻿13 matches found: 
+<match path=C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\Reebro.cs>
+    File: `MySingingMonsters/Reebro.cs`
+```c#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MySingingMonsters
+{
+    internal class Reebro : Monster
+    {
+        public Reebro(int Level)
+        {
+            baseHp = 900;
+                        baseAttack = 315;
+            level = Level;
+            setStats();
+            elems = new List<Element>();
+            elems.Add(new Element("Mech"));
+            attacks = new List<Attack>();
+            attacks.Add(new Attack("Suit Stomp", new Element("None"), 1));
+            if (level >= 5) attacks.Add(new Attack("Steam Machine", new Element("Air"), 1.25f));
+            if (level >= 10) attacks.Add(new Attack("Mech Support", new Element("Mech"), 1.1f));
+        }
+    }
+}
+
+```
+</match>
+<match path=C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\Dragong.cs>
+    File: `MySingingMonsters/Dragong.cs`
+```c#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MySingingMonsters
+{
+    internal class Dragong : Monster
+    {
+        public Dragong(int Level)
+        {
+            baseHp = 1190;
+                        baseAttack = 380;
+            level = Level;
+            setStats();
+            elems = new List<Element>();
+            elems.Add(new Element("Mech"));
+            elems.Add(new Element("Poison"));
+            attacks = new List<Attack>();
+            attacks.Add(new Attack("Bang a Gong", new Element("None"), 1));
+            if (level >= 5) attacks.Add(new Attack("Plates Spinning", new Element("Mech"), 1.12f));
+            if (level >= 10) attacks.Add(new Attack("Toxungen Toll", new Element("Poison"), 1.24f));
+        }
+    }
+}
+
+```
+</match>
+<match path=C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\MammotBunceCap.cs>
+    File: `MySingingMonsters/MammotBunceCap.cs`
+```c#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MySingingMonsters
+{
+    internal class MammotBunceCap : Monster
+    {
+        public MammotBunceCap(int Level)
+        {
+            baseHp = 225;
+            baseAttack = 75;
+            level = Level;
+            setStats();
+            elems = new List<Element>();
+            elems.Add(new Element("Cold"));
+            attacks = new List<Attack>();
+            attacks.Add(new Attack("Hoarse Holler", new Element("None"), 1));
+            if (level >= 10) attacks.Add(new Attack("Bunce Cap", new Element("Plant"), 1.1f));
+            if (level >= 5) attacks.Add(new Attack("Snow Bawl", new Element("Cold"), 1.2f));
+
+        }
+    }
+}
+
+```
+</match>
+<match path=C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\MammotBunceCap.cs>
+    File: `MySingingMonsters/MammotBunceCap.cs`
+```c#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MySingingMonsters
+{
+    internal class MammotBunceCap : Monster
+    {
+        public MammotBunceCap(int Level)
+        {
+            baseHp = 225;
+            baseAttack = 75;
+            level = Level;
+            setStats();
+            elems = new List<Element>();
+            elems.Add(new Element("Cold"));
+            attacks = new List<Attack>();
+            attacks.Add(new Attack("Hoarse Holler", new Element("None"), 1));
+            if (level >= 10) attacks.Add(new Attack("Bunce Cap", new Element("Plant"), 1.1f));
+            if (level >= 5) attacks.Add(new Attack("Snow Bawl", new Element("Cold"), 1.2f));
+
+        }
+    }
+}
+
+```
+</match>
+<match path=C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\Noggin.cs>
+    File: `MySingingMonsters/Noggin.cs`
+```c#
+/*...*/using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MySingingMonsters
+{
+    internal class Noggin : Monster
+    {
+
+        public Noggin(int Level)
+        {
+            baseHp = 200;
+            baseAttack = 80;
+            level = Level;
+            setStats();
+            elems = new List<Element>();
+            elems.Add(new Element("Earth"));
+            attacks = new List<Attack>();
+            attacks.Add(new Attack("Paradiddle", new Element("None"), 1));
+            if (level >= 5) attacks.Add(new Attack("Earthbeat", new Element("Earth"), 1.19f));
+
+        }
+    }
+}
+
+```
+</match>
+<match path=C:\Users\midge\source\repos\GameTeamSim\GameSimulation\.vs\GameSimulation\VSGitHubCopilot\ContextSpill\d63aad9e67884e50bab16d3cf3b26ee6\c80a00c2252b48d4a43034e0a47ccb6b\searchresult.txt>
+    File: `...e50bab16d3cf3b26ee6/c80a00c2252b48d4a43034e0a47ccb6b/searchresult.txt`
+````text
+﻿12 matches found: 
+<match path=C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\Mammot.cs>
+    File: `MySingingMonsters/Mammot.cs`
+```c#
+/*...*/using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MySingingMonsters
+{
+    internal class Mammot : Monster
+    {
+        public List<Attack> attacks;
+        public Mammot(int Level)
+        {
+            baseHp = 225;
+            baseAttack = 75;
+            level = Level;
+            setStats();
+            elems = new List<Element>();
+            elems.Add(new Element("Cold"));
+            attacks = new List<Attack>();
+            attacks.Add(new Attack("Hoarse Hollar", new Element("None"), 1));
+...
+````
+</match>
+<match path=C:\Users\midge\source\repos\GameTeamSim\GameSimulation\.vs\GameSimulation\VSGitHubCopilot\ContextSpill\d63aad9e67884e50bab16d3cf3b26ee6\c80a00c2252b48d4a43034e0a47ccb6b\searchresult.txt>
+    File: `...e50bab16d3cf3b26ee6/c80a00c2252b48d4a43034e0a47ccb6b/searchresult.txt`
+````text
+﻿12 matches found: 
+<match path=C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\Mammot.cs>
+    File: `MySingingMonsters/Mammot.cs`
+```c#
+/*...*/using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MySingingMonsters
+{
+    internal class Mammot : Monster
+    {
+        public List<Attack> attacks;
+        public Mammot(int Level)
+        {
+            baseHp = 225;
+            baseAttack = 75;
+            level = Level;
+            setStats();
+            elems = new List<Element>();
+            elems.Add(new Element("Cold"));
+            attacks = new List<Attack>();
+            attacks.Add(new Attack("Hoarse Hollar", new Element("None"), 1));
+...
+````
+</match>
+<match path=C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\Hoola.cs>
+    File: `MySingingMonsters/Hoola.cs`
+```c#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MySingingMonsters
+{
+    internal class Hoola : Monster
+    {
+        public Hoola(int Level)
+        {
+            baseHp = 700;
+                        baseAttack = 190;
+            level = Level;
+            setStats();
+            elems = new List<Element>();
+            elems.Add(new Element("Seasonal"));
+            attacks = new List<Attack>();
+            attacks.Add(new Attack("Sandstorm", new Element("Earth"), 1));
+            if (level >= 5) attacks.Add(new Attack("Hoop and Holler", new Element("None"), 1.14f));
+            if (level >= 10) attacks.Add(new Attack("Feels like Summer", new Element("Earth"), 1.2f));
+        }
+    }
+}
+
+```
+</match>
+<match path=C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\Punkleton.cs>
+    File: `MySingingMonsters/Punkleton.cs`
+```c#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MySingingMonsters
+{
+    internal class Punkleton : Monster
+    {
+        public Punkleton(int Level)
+        {
+            baseHp = 600;
+                        baseAttack = 310;
+            level = Level;
+            setStats();
+            elems = new List<Element>();
+            elems.Add(new Element("Seasonal"));
+            attacks = new List<Attack>();
+            attacks.Add(new Attack("Gourd Scare", new Element("Plant"), 1));
+            if (level >= 5) attacks.Add(new Attack("Bone Jangles", new Element("None"), 1.14f));
+            if (level >= 10) attacks.Add(new Attack("Patch-work Lilt", new Element("Plant"), 1.2f));
+        }
+    }
+}
+
+```
+</match>
+<match path=C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\Wrapper.cs>
+    // Lines 15 to 31
+</match>
+<match path=C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\CostumeVariant.cs>
+    // Lines 6 to 50
+</match>
+<match path=C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\CostumeVariant.cs>
+    // Lines 6 to 36
+</match>
+<match path=C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\FurcornLuckyThirteen.cs>
+    File: `MySingingMonsters/FurcornLuckyThirteen.cs`
+```c#
+namespace MySingingMonsters
+{
+    internal sealed class FurcornLuckyThirteen : CostumeVariant
+    {
+        public FurcornLuckyThirteen(int level)
+            : base(new Furcorn(level), 1, "Lucky Thirteen", "None", 1.1f, "Warbly Falsetto")
+        {
+        }
+    }
+}
+
+```
+</match>

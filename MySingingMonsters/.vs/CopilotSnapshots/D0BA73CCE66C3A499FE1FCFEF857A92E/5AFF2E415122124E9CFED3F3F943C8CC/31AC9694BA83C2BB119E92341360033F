@@ -1,0 +1,107 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MySingingMonsters
+{
+    internal class Gauntlet
+    {
+        public Team PlayerTeam;
+       
+        public Element contains;
+        public int maxMonsters;
+        public int bedContains;
+        public int maxBeds;
+        public int maxNumElements;
+        public bool natOnly;
+        public bool ethOnly;
+        public Wrapper wrapper;
+        public Gauntlet(Team player, Wrapper game)
+        {
+            PlayerTeam = player;
+            contains = new Element("None");
+            maxMonsters = 3;
+            bedContains = 0;
+            maxBeds = 20;
+            maxNumElements = 0;
+            natOnly = false;
+            ethOnly = false;
+            wrapper = game;
+        }
+        public string runGauntlet()
+        {
+            int wins = 0;
+            int losses = 0;
+            List<Monster> ops = new List<Monster> {};
+            List<Monster> enemyTeam = new List<Monster> {};
+            for (int i = 0; i < 100000; i++)
+            {
+                Team opponent = new Team(new List<Monster> {});
+                while(true)
+                {
+                    if(enemyTeam.Count == maxMonsters)
+                    {
+                        break;
+                    }
+                    if(calculateBeds() == maxBeds)
+                    {
+                        break;
+                    }
+                    Monster mon = wrapper.getRandomMonster(contains, natOnly, ethOnly);
+                    if(calculateBeds() + mon.elems.Count() <= maxBeds)
+                    {
+                        enemyTeam.Add(mon);
+                    }
+                    
+                }
+                wrapper.Player = PlayerTeam;
+                wrapper.Opononent = opponent;
+                bool result = wrapper.game();
+                if(result == true)
+                {
+                    wins += 1;
+                }
+                else
+                {
+                    losses += 1;
+                    foreach(Monster mon in opponent.Monsters)
+                    {
+                        ops.Add(mon);
+                    }
+                }
+
+
+
+
+            }
+            //top 3 ops
+            var top3Ops = ops.GroupBy(m => m.elems[0].name)
+                             .OrderByDescending(g => g.Count())
+                             .Take(3)
+                             .Select(g => g.Key);
+            return "You won " + wins + " times and lost " + losses + " times. The monsters you lost to were: " + string.Join(", ", top3Ops);
+
+
+
+        }
+        public int calculateBeds()
+        {
+            int i = 0;
+            foreach (Monster mon in PlayerTeam.Monsters)
+            {
+                i += mon.elems.Count;
+                if (mon.elems[0].name == "seasonal") i += 1;
+                foreach(Element e in mon.elems)
+                {
+                    if(e.isEtherial == true) i += 4;
+                }
+            }
+            return i;
+        }
+
+    }
+}

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MySingingMonsters")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+51feaea0e2119762f4438f3b5a0daeb65295bb39")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9ccfdeca7e19999f5a297aced029f1b3664e30da")]
 [assembly: System.Reflection.AssemblyProductAttribute("MySingingMonsters")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MySingingMonsters")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

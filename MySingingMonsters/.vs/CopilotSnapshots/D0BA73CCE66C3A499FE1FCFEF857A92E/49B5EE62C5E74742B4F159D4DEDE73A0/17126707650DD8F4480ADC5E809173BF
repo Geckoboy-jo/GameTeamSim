@@ -1,0 +1,162 @@
+﻿namespace MySingingMonsters
+{
+    public partial class Form1 : Form
+    {
+        private readonly Type?[] selectedMonsterTypes = new Type?[3];
+        private readonly Button[] monsterButtons;
+
+        public Form1()
+        {
+            InitializeComponent();
+            monsterButtons = new[] { button1, button2, button3 };
+            button3.Click += (_, _) => SelectMonster(2);
+            winBox.Text = "Choose a monster for each team slot.";
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SelectMonster(0);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            SelectMonster(1);
+        }
+
+        private void SelectMonster(int slot)
+        {
+            Type[] monsterTypes =
+            {
+                typeof(Arackulele), typeof(Bellowfish), typeof(Blabbit), typeof(Boodoo),
+                typeof(Bowgart), typeof(Clamble), typeof(Congle), typeof(Cybop),
+                typeof(Dandidoo), typeof(Deedge), typeof(Dragong), typeof(Drumpler),
+                typeof(Entbrat), typeof(Furcorn), typeof(Fwog), typeof(Ghazt),
+                typeof(Grumpyre), typeof(Humbug), typeof(Hoola), typeof(Jeeode),
+                typeof(Jellbilly), typeof(Kazilleon), typeof(Mammot), typeof(Maw),
+                typeof(Nebulob), typeof(Noggin), typeof(Oaktopus), typeof(Pango),
+                typeof(PomPom), typeof(PotBelly), typeof(Pummel), typeof(Punkleton),
+                typeof(Quarrister), typeof(Quibble), typeof(Reedling), typeof(Reebro),
+                typeof(Riff), typeof(Scups), typeof(Shellbeat), typeof(Shrubb),
+                typeof(Sox), typeof(Spunge), typeof(Thumpies), typeof(ToeJammer),
+                typeof(TRox), typeof(Tweedle), typeof(Whisp), typeof(Yool)
+            };
+
+            using var picker = new Form
+            {
+                Text = "Choose a Monster",
+                StartPosition = FormStartPosition.CenterParent,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                ClientSize = new Size(340, 110),
+                MinimizeBox = false,
+                MaximizeBox = false
+            };
+
+            var monsterPicker = new ComboBox
+            {
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                Location = new Point(16, 16),
+                Size = new Size(308, 30),
+                Font = new Font("Segoe UI", 11F)
+            };
+
+            foreach (Type type in monsterTypes.OrderBy(type => FormatMonsterName(type.Name)))
+            {
+                monsterPicker.Items.Add(new MonsterChoice(type, FormatMonsterName(type.Name)));
+            }
+
+            monsterPicker.SelectedIndex = 0;
+
+            var selectButton = new Button
+            {
+                Text = "Select",
+                DialogResult = DialogResult.OK,
+                Location = new Point(164, 62),
+                Size = new Size(76, 30)
+            };
+
+            var cancelButton = new Button
+            {
+                Text = "Cancel",
+                DialogResult = DialogResult.Cancel,
+                Location = new Point(248, 62),
+                Size = new Size(76, 30)
+            };
+
+            picker.Controls.Add(monsterPicker);
+            picker.Controls.Add(selectButton);
+            picker.Controls.Add(cancelButton);
+            picker.AcceptButton = selectButton;
+            picker.CancelButton = cancelButton;
+
+            if (picker.ShowDialog(this) != DialogResult.OK || monsterPicker.SelectedItem is not MonsterChoice choice)
+            {
+                return;
+            }
+
+            selectedMonsterTypes[slot] = choice.Type;
+            monsterButtons[slot].Text = choice.DisplayName;
+
+            if (selectedMonsterTypes.All(type => type is not null))
+            {
+                _ = RunSimulationAsync();
+            }
+            else
+            {
+                winBox.Text = $"Selected {choice.DisplayName}. Choose a monster for each remaining slot.";
+            }
+        }
+
+        private async Task RunSimulationAsync()
+        {
+            foreach (Button button in monsterButtons)
+            {
+                button.Enabled = false;
+            }
+
+            winBox.Text = "Simulating...";
+            var playerTeam = selectedMonsterTypes
+                .Select(type => (Monster)Activator.CreateInstance(type!, 17)!)
+                .ToList();
+
+            try
+            {
+                winBox.Text = await Task.Run(() => new Wrapper(playerTeam).game());
+            }
+            finally
+            {
+                foreach (Button button in monsterButtons)
+                {
+                    button.Enabled = true;
+                }
+            }
+        }
+
+        private static string FormatMonsterName(string className)
+        {
+            var name = new System.Text.StringBuilder(className.Length + 8);
+            for (int index = 0; index < className.Length; index++)
+            {
+                if (index > 0 && char.IsUpper(className[index]) &&
+                    (char.IsLower(className[index - 1]) ||
+                     (index + 1 < className.Length && char.IsLower(className[index + 1]))))
+                {
+                    name.Append(' ');
+                }
+
+                name.Append(className[index]);
+            }
+
+            return name.ToString();
+        }
+
+        private sealed record MonsterChoice(Type Type, string DisplayName)
+        {
+            public override string ToString() => DisplayName;
+        }
+    }
+}

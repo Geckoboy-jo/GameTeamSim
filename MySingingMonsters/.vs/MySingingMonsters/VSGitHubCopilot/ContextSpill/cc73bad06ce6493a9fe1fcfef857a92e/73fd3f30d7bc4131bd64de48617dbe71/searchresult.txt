@@ -1,0 +1,318 @@
+﻿13 matches found: 
+<match path=C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\Element.cs>
+    // Lines 10 to 59
+</match>
+<match path=C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\Element.cs>
+    // Lines 13 to 20
+</match>
+<match path=C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\Wrapper.cs>
+    // Lines 84 to 96
+</match>
+<match path=C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\NogginKineticKicks.cs>
+    File: `MySingingMonsters/NogginKineticKicks.cs`
+```c#
+/*...*/using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MySingingMonsters
+{
+    internal class NogginKineticKicks : Monster
+    {
+
+        public NogginKineticKicks(int Level)
+        {
+            baseHp = 200;
+            baseAttack = 80;
+            level = Level;
+            setStats();
+            elems = new List<Element>();
+            elems.Add(new Element("Earth"));
+            attacks = new List<Attack>();
+            attacks.Add(new Attack("Paradiddle", new Element("None"), 1));
+            if (level >= 5) attacks.Add(new Attack("Kinetic Kicks", new Element("Earth"), 1.25f));
+
+        }
+    }
+}
+
+```
+</match>
+<match path=C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\Whisp.cs>
+    File: `MySingingMonsters/Whisp.cs`
+```c#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MySingingMonsters
+{
+    internal class Whisp : Monster
+    {
+        public Whisp(int Level)
+        {
+            baseHp = 1030;
+                        baseAttack = 400;
+            level = Level;
+            setStats();
+            elems = new List<Element>();
+            elems.Add(new Element("Plasma"));
+            elems.Add(new Element("Shadow"));
+            attacks = new List<Attack>();
+            attacks.Add(new Attack("Dreamy Dirge", new Element("None"), 1));
+            if (level >= 5) attacks.Add(new Attack("Other Side", new Element("Plasma"), 1.1f));
+            if (level >= 10) attacks.Add(new Attack("Hover Haunt", new Element("Shadow"), 1.21f));
+        }
+    }
+}
+
+```
+</match>
+<match path=C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\Whisp.cs>
+    File: `MySingingMonsters/Whisp.cs`
+```c#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MySingingMonsters
+{
+    internal class Whisp : Monster
+    {
+        public Whisp(int Level)
+        {
+            baseHp = 1030;
+                        baseAttack = 400;
+            level = Level;
+            setStats();
+            elems = new List<Element>();
+            elems.Add(new Element("Plasma"));
+            elems.Add(new Element("Shadow"));
+            attacks = new List<Attack>();
+            attacks.Add(new Attack("Dreamy Dirge", new Element("None"), 1));
+            if (level >= 5) attacks.Add(new Attack("Other Side", new Element("Plasma"), 1.1f));
+            if (level >= 10) attacks.Add(new Attack("Hover Haunt", new Element("Shadow"), 1.21f));
+        }
+    }
+}
+
+```
+</match>
+<match path=C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\Nebulob.cs>
+    File: `MySingingMonsters/Nebulob.cs`
+```c#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MySingingMonsters
+{
+    internal class Nebulob : Monster
+    {
+        public Nebulob(int Level)
+        {
+            baseHp = 1060;
+                        baseAttack = 400;
+            level = Level;
+            setStats();
+            elems = new List<Element>();
+            elems.Add(new Element("Plasma"));
+            elems.Add(new Element("Mech"));
+            attacks = new List<Attack>();
+            attacks.Add(new Attack("Rhythm & Ooze", new Element("None"), 1));
+            if (level >= 5) attacks.Add(new Attack("Exo-suit Swing", new Element("Mech"), 1.12f));
+            if (level >= 10) attacks.Add(new Attack("Ectoplasmic Jive", new Element("Plasma"), 1.2f));
+        }
+    }
+}
+
+```
+</match>
+<match path=C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\Sox.cs>
+    File: `MySingingMonsters/Sox.cs`
+```c#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MySingingMonsters
+{
+    internal class Sox : Monster
+    {
+        public Sox(int Level)
+        {
+            baseHp = 1095;
+                        baseAttack = 395;
+            level = Level;
+            setStats();
+            elems = new List<Element>();
+            elems.Add(new Element("Plasma"));
+            elems.Add(new Element("Crystal"));
+            attacks = new List<Attack>();
+            attacks.Add(new Attack("Unknown Saying", new Element("None"), 1));
+            if (level >= 5) attacks.Add(new Attack("Caudal Cuddle", new Element("Plasma"), 1.1f));
+            if (level >= 10) attacks.Add(new Attack("Precious Pads", new Element("Crystal"), 1.23f));
+        }
+    }
+}
+
+```
+</match>
+<match path=C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\Pango.cs>
+    File: `MySingingMonsters/Pango.cs`
+```c#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MySingingMonsters
+{
+    internal class Pango : Monster
+    {
+        public Pango(int Level)
+        {
+            baseHp = 525;
+                        baseAttack = 105;
+            level = Level;
+            setStats();
+            elems = new List<Element>();
+            elems.Add(new Element("Air"));
+            elems.Add(new Element("Cold"));
+            attacks = new List<Attack>();
+            attacks.Add(new Attack("Beak Bristle", new Element("None"), 1));
+            if (level >= 5) attacks.Add(new Attack("Frostbite", new Element("Cold"), 1.15f));
+            if (level >= 10) attacks.Add(new Attack("Flightless Fancy", new Element("Air"), 1.47f));
+        }
+    }
+}
+
+```
+</match>
+<match path=C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\QuibbleValiantVisors.cs>
+    File: `MySingingMonsters/QuibbleValiantVisors.cs`
+```c#
+namespace MySingingMonsters
+{
+    internal sealed class QuibbleValiantVisors : CostumeVariant
+    {
+        public QuibbleValiantVisors(int level)
+            : base(new Quibble(level), 1, "Valiant Visors", "None", 1.07f, "Keystroke")
+        {
+        }
+    }
+}
+
+```
+</match>
+<match path=C:\Users\midge\source\repos\GameTeamSim\GameSimulation\Dash.cs>
+    File: `GameSimulation/Dash.cs`
+```c#
+/*...*/using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GameSimulation
+{
+    public class Dash : Ability
+    {
+        Dash()
+        {
+            diceCost = 1;
+            attackType = "burst";
+            range = 0;
+        }
+        
+        public bool upgrone;
+        public bool upgrtwo;
+
+        public void useAbility(Dice dice)
+        {
+            if (upgrone && upgrtwo) user.speed += dice.value + 2;
+            else if ((!upgrone && upgrtwo) || (upgrone && !upgrtwo)) user.speed += dice.value + 1;
+            else user.speed += dice.value;
+            
+        }
+    }
+}
+
+```
+</match>
+<match path=C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\MammotOffTheCuffs.cs>
+    File: `MySingingMonsters/MammotOffTheCuffs.cs`
+```c#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MySingingMonsters
+{
+    internal class MammotOffTheCuffs : Monster
+    {
+        
+        public MammotOffTheCuffs(int Level)
+        {
+            baseHp = 225;
+            baseAttack = 75;
+            level = Level;
+            setStats();
+            elems = new List<Element>();
+            elems.Add(new Element("Cold"));
+            attacks = new List<Attack>();
+            attacks.Add(new Attack("Off the Cuffs", new Element("None"), 1.2f));
+            if (level >= 5) attacks.Add(new Attack("Snow Bawl", new Element("Cold"), 1.2f));
+
+        }
+    }
+}
+
+```
+</match>
+<match path=C:\Users\midge\source\repos\GameTeamSim\MySingingMonsters\Noggin.cs>
+    File: `MySingingMonsters/Noggin.cs`
+```c#
+/*...*/using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MySingingMonsters
+{
+    internal class Noggin : Monster
+    {
+
+        public Noggin(int Level)
+        {
+            baseHp = 200;
+            baseAttack = 80;
+            level = Level;
+            setStats();
+            elems = new List<Element>();
+            elems.Add(new Element("Earth"));
+            attacks = new List<Attack>();
+            attacks.Add(new Attack("Paradiddle", new Element("None"), 1));
+            if (level >= 5) attacks.Add(new Attack("Earthbeat", new Element("Earth"), 1.19f));
+
+        }
+    }
+}
+
+```
+</match>

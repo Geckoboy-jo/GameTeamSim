@@ -1,0 +1,484 @@
+﻿namespace MySingingMonsters
+{
+    public partial class Form1 : Form
+    {
+        private readonly Type?[] playerMonsterTypes = new Type?[3];
+        private readonly Type?[] opponentMonsterTypes = new Type?[3];
+        private readonly Button[] playerButtons;
+        private readonly Button[] opponentButtons;
+        private readonly TrackBar[] playerLevelSliders;
+        private readonly TrackBar[] opponentLevelSliders;
+        private readonly ContextMenuStrip gauntletMenu;
+        private static readonly string[] GauntletNames =
+        {
+            "No Restrictions", "Plant Only", "Water Only", "Earth Only", "Air Only", "Cold Only",
+            "Ethereals Only", "Max 9 Beds", "Max 6 Beds", "One Element Only", "Two Elements Only",
+            "Three Elements Only", "Four Elements Only", "Seasonal Only"
+        };
+        private static readonly string[] ElementNames =
+        {
+            "Plant", "Cold", "Air", "Water", "Earth", "Seasonal", "Plasma", "Shadow", "Mech", "Crystal", "Poison"
+        };
+        public string? SelectedGauntlet { get; private set; }
+
+        private sealed record GauntletSettings(
+            int MaxBeds,
+            string[] AllowedElements,
+            bool NaturalOnly,
+            bool EtherealOnly,
+            int LevelCap);
+
+        public Form1()
+        {
+            InitializeComponent();
+            components ??= new System.ComponentModel.Container();
+            gauntletMenu = new ContextMenuStrip(components);
+            foreach (string name in GauntletNames)
+            {
+                var item = new ToolStripMenuItem(name);
+                item.Click += async (_, _) => await RunGauntletAsync(name);
+                gauntletMenu.Items.Add(item);
+            }
+            var customGauntletItem = new ToolStripMenuItem("Custom Gauntlet...");
+            customGauntletItem.Click += async (_, _) => await RunCustomGauntletAsync();
+            gauntletMenu.Items.Add(new ToolStripSeparator());
+            gauntletMenu.Items.Add(customGauntletItem);
+
+            playerButtons = new[] { button1, button2, button3 };
+            opponentButtons = new[] { opponentButton1, opponentButton2, opponentButton3 };
+            playerLevelSliders = AddLevelSliders(monstersPanel, playerButtons);
+            opponentLevelSliders = AddLevelSliders(opponentPanel, opponentButtons);
+            button3.Click += (_, _) => SelectMonster(false, 2);
+            opponentButton1.Click += (_, _) => SelectMonster(true, 0);
+            opponentButton2.Click += (_, _) => SelectMonster(true, 1);
+            opponentButton3.Click += (_, _) => SelectMonster(true, 2);
+            runGauntletButton.Click += runGauntletButton_Click;
+            calculateBestTeamButton.Click += calculateBestTeamButton_Click;
+            startButton.Enabled = false;
+            winBox.Text = "Choose your teams, then start the battle.";
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SelectMonster(false, 0);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            SelectMonster(false, 1);
+        }
+
+        private async void startButton_Click(object sender, EventArgs e)
+        {
+            if (!playerMonsterTypes.Any(type => type is not null) ||
+                !opponentMonsterTypes.Any(type => type is not null))
+            {
+                winBox.Text = "Choose at least one monster for both teams.";
+                return;
+            }
+
+            await RunSimulationAsync();
+        }
+
+        private void runGauntletButton_Click(object? sender, EventArgs e)
+        {
+            if (!playerMonsterTypes.Any(type => type is not null))
+            {
+                winBox.Text = "Choose at least one monster for your team before running a gauntlet.";
+                return;
+            }
+
+            gauntletMenu.Show(runGauntletButton, new Point(0, runGauntletButton.Height));
+        }
+
+        private async Task RunGauntletAsync(string name, GauntletSettings? customSettings = null)
+        {
+            SelectedGauntlet = name;
+            List<Monster> playerMonsters = Enumerable.Range(0, playerMonsterTypes.Length)
+                .Where(index => playerMonsterTypes[index] is not null)
+                .Select(index => (Monster)Activator.CreateInstance(
+                    playerMonsterTypes[index]!, playerLevelSliders[index].Value)!)
+                .ToList();
+            var playerTeam = new Team(playerMonsters);
+            var wrapper = new Wrapper();
+            wrapper.Player = playerTeam;
+
+            var gauntlet = new Gauntlet(playerTeam, wrapper);
+            gauntlet.Iterations = decimal.ToInt32(gauntletIterationsInput.Value);
+            ConfigureGauntlet(gauntlet, name);
+            if (customSettings is not null)
+            {
+                ApplyGauntletSettings(gauntlet, customSettings);
+            }
+
+            SetGauntletControlsEnabled(false);
+            winBox.Text = $"Running {name}...";
+
+            try
+            {
+                winBox.Text = await Task.Run(gauntlet.runGauntlet);
+            }
+            catch (Exception exception)
+            {
+                winBox.Text = $"Gauntlet failed: {exception.Message}";
+            }
+            finally
+            {
+                SetGauntletControlsEnabled(true);
+            }
+        }
+
+        private static void ConfigureGauntlet(Gauntlet gauntlet, string name)
+        {
+            switch (name)
+            {
+                case "Plant Only":
+                    gauntlet.contains = new Element("Plant");
+                    break;
+                case "Water Only":
+                    gauntlet.contains = new Element("Water");
+                    break;
+                case "Earth Only":
+                    gauntlet.contains = new Element("Earth");
+                    break;
+                case "Air Only":
+                    gauntlet.contains = new Element("Air");
+                    break;
+                case "Cold Only":
+                    gauntlet.contains = new Element("Cold");
+                    break;
+                case "Ethereals Only":
+                    gauntlet.ethOnly = true;
+                    break;
+                case "Max 9 Beds":
+                    gauntlet.maxBeds = 9;
+                    break;
+                case "Max 6 Beds":
+                    gauntlet.maxBeds = 6;
+                    break;
+                case "One Element Only":
+                    gauntlet.requiredNumElements = 1;
+                    break;
+                case "Two Elements Only":
+                    gauntlet.requiredNumElements = 2;
+                    break;
+                case "Three Elements Only":
+                    gauntlet.requiredNumElements = 3;
+                    break;
+                case "Four Elements Only":
+                    gauntlet.requiredNumElements = 4;
+                    break;
+                case "Seasonal Only":
+                    gauntlet.contains = new Element("Seasonal");
+                    break;
+            }
+        }
+
+        private async Task RunCustomGauntletAsync()
+        {
+            GauntletSettings? settings = ShowGauntletSettingsDialog(this, "Custom Gauntlet Settings");
+            if (settings is not null)
+            {
+                await RunGauntletAsync("Custom Gauntlet", settings);
+            }
+        }
+
+        private static void ApplyGauntletSettings(Gauntlet gauntlet, GauntletSettings settings)
+        {
+            gauntlet.maxBeds = settings.MaxBeds;
+            gauntlet.allowedElements = settings.AllowedElements.Length == 0
+                ? null
+                : new HashSet<string>(settings.AllowedElements, StringComparer.OrdinalIgnoreCase);
+            gauntlet.natOnly = settings.NaturalOnly;
+            gauntlet.ethOnly = settings.EtherealOnly;
+            gauntlet.MonsterLevelCap = settings.LevelCap;
+        }
+
+        private static GauntletSettings? ShowGauntletSettingsDialog(IWin32Window owner, string title)
+        {
+            using var dialog = new Form
+            {
+                Text = title,
+                StartPosition = FormStartPosition.CenterParent,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                ClientSize = new Size(440, 510),
+                MinimizeBox = false,
+                MaximizeBox = false
+            };
+
+            var bedsLabel = new Label { AutoSize = true, Location = new Point(18, 20), Text = "Maximum beds:" };
+            var bedsInput = new NumericUpDown
+            {
+                Location = new Point(190, 16),
+                Maximum = 100,
+                Minimum = 1,
+                Value = 20,
+                Width = 200
+            };
+            var levelLabel = new Label { AutoSize = true, Location = new Point(18, 58), Text = "Monster level cap:" };
+            var levelInput = new NumericUpDown
+            {
+                Location = new Point(190, 54),
+                Maximum = 20,
+                Minimum = 1,
+                Value = 20,
+                Width = 200
+            };
+            var categoryLabel = new Label { AutoSize = true, Location = new Point(18, 96), Text = "Monster category:" };
+            var categoryInput = new ComboBox
+            {
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                Location = new Point(190, 92),
+                Width = 200
+            };
+            categoryInput.Items.AddRange(new object[] { "Any", "Natural only", "Ethereal only" });
+            categoryInput.SelectedIndex = 0;
+
+            var elementsLabel = new Label
+            {
+                AutoSize = true,
+                Location = new Point(18, 132),
+                Text = "Allowed elements (leave unchecked for any):"
+            };
+            var elementsInput = new CheckedListBox
+            {
+                CheckOnClick = true,
+                Location = new Point(18, 156),
+                Size = new Size(404, 275)
+            };
+            elementsInput.Items.AddRange(ElementNames.Cast<object>().ToArray());
+
+            var okButton = new Button
+            {
+                Text = "OK",
+                DialogResult = DialogResult.OK,
+                Location = new Point(256, 458),
+                Size = new Size(78, 32)
+            };
+            var cancelButton = new Button
+            {
+                Text = "Cancel",
+                DialogResult = DialogResult.Cancel,
+                Location = new Point(344, 458),
+                Size = new Size(78, 32)
+            };
+
+            dialog.Controls.AddRange(new Control[]
+            {
+                bedsLabel, bedsInput, levelLabel, levelInput, categoryLabel, categoryInput,
+                elementsLabel, elementsInput, okButton, cancelButton
+            });
+            dialog.AcceptButton = okButton;
+            dialog.CancelButton = cancelButton;
+
+            if (dialog.ShowDialog(owner) != DialogResult.OK)
+            {
+                return null;
+            }
+
+            string[] allowedElements = elementsInput.CheckedItems.Cast<string>().ToArray();
+            return new GauntletSettings(
+                decimal.ToInt32(bedsInput.Value),
+                allowedElements,
+                categoryInput.SelectedIndex == 1,
+                categoryInput.SelectedIndex == 2,
+                decimal.ToInt32(levelInput.Value));
+        }
+
+        private void SetGauntletControlsEnabled(bool enabled)
+        {
+            foreach (Button button in playerButtons.Concat(opponentButtons))
+            {
+                button.Enabled = enabled;
+            }
+
+            foreach (TrackBar slider in playerLevelSliders.Concat(opponentLevelSliders))
+            {
+                slider.Enabled = enabled;
+            }
+
+            runGauntletButton.Enabled = enabled;
+            gauntletIterationsInput.Enabled = enabled;
+            startButton.Enabled = enabled && playerMonsterTypes.Any(type => type is not null) &&
+                opponentMonsterTypes.Any(type => type is not null);
+        }
+
+        private void SelectMonster(bool isOpponent, int slot)
+        {
+            Type?[] teamTypes = isOpponent ? opponentMonsterTypes : playerMonsterTypes;
+            Button[] teamButtons = isOpponent ? opponentButtons : playerButtons;
+            Type[] monsterTypes = typeof(Monster).Assembly.GetTypes()
+                .Where(type => type.IsClass && !type.IsAbstract &&
+                    typeof(Monster).IsAssignableFrom(type) &&
+                    type.GetConstructor(new[] { typeof(int) }) is not null)
+                .OrderBy(type => FormatMonsterName(type.Name))
+                .ToArray();
+
+            using var picker = new Form
+            {
+                Text = isOpponent ? "Choose an Opponent Monster" : "Choose a Team Monster",
+                StartPosition = FormStartPosition.CenterParent,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                ClientSize = new Size(340, 110),
+                MinimizeBox = false,
+                MaximizeBox = false
+            };
+
+            var monsterPicker = new ComboBox
+            {
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                Location = new Point(16, 16),
+                Size = new Size(308, 30),
+                Font = new Font("Segoe UI", 11F)
+            };
+
+            foreach (Type type in monsterTypes)
+            {
+                monsterPicker.Items.Add(new MonsterChoice(type, FormatMonsterName(type.Name)));
+            }
+
+            monsterPicker.SelectedIndex = 0;
+
+            var selectButton = new Button
+            {
+                Text = "Select",
+                DialogResult = DialogResult.OK,
+                Location = new Point(164, 62),
+                Size = new Size(76, 30)
+            };
+
+            var cancelButton = new Button
+            {
+                Text = "Cancel",
+                DialogResult = DialogResult.Cancel,
+                Location = new Point(248, 62),
+                Size = new Size(76, 30)
+            };
+
+            picker.Controls.Add(monsterPicker);
+            picker.Controls.Add(selectButton);
+            picker.Controls.Add(cancelButton);
+            picker.AcceptButton = selectButton;
+            picker.CancelButton = cancelButton;
+
+            if (picker.ShowDialog(this) != DialogResult.OK || monsterPicker.SelectedItem is not MonsterChoice choice)
+            {
+                return;
+            }
+
+            teamTypes[slot] = choice.Type;
+            teamButtons[slot].Text = choice.DisplayName;
+
+            bool bothTeamsHaveMonsters = playerMonsterTypes.Any(type => type is not null) &&
+                opponentMonsterTypes.Any(type => type is not null);
+            startButton.Enabled = bothTeamsHaveMonsters;
+            winBox.Text = bothTeamsHaveMonsters
+                ? "Teams ready. Press Start Battle."
+                : "Choose at least one monster for both teams.";
+        }
+
+        private async Task RunSimulationAsync()
+        {
+            foreach (Button button in playerButtons.Concat(opponentButtons))
+            {
+                button.Enabled = false;
+            }
+            startButton.Enabled = false;
+
+            winBox.Text = "Simulating...";
+            List<Monster> playerTeam = Enumerable.Range(0, playerMonsterTypes.Length)
+                .Where(index => playerMonsterTypes[index] is not null)
+                .Select(index => (Monster)Activator.CreateInstance(
+                    playerMonsterTypes[index]!, playerLevelSliders[index].Value)!)
+                .ToList();
+            List<Monster> opponentTeam = Enumerable.Range(0, opponentMonsterTypes.Length)
+                .Where(index => opponentMonsterTypes[index] is not null)
+                .Select(index => (Monster)Activator.CreateInstance(
+                    opponentMonsterTypes[index]!, opponentLevelSliders[index].Value)!)
+                .ToList();
+
+            try
+            {
+                bool playerWon = await Task.Run(() => new Wrapper(playerTeam, opponentTeam).game());
+                winBox.Text = playerWon ? "You won!" : "You lost.";
+            }
+            finally
+            {
+                foreach (Button button in playerButtons.Concat(opponentButtons))
+                {
+                    button.Enabled = true;
+                }
+                startButton.Enabled = playerMonsterTypes.Any(type => type is not null) &&
+                    opponentMonsterTypes.Any(type => type is not null);
+            }
+        }
+
+        private static TrackBar[] AddLevelSliders(Panel panel, Button[] buttons)
+        {
+            var sliders = new TrackBar[buttons.Length];
+            for (int index = 0; index < buttons.Length; index++)
+            {
+                Button button = buttons[index];
+                button.Location = new Point(button.Left, 10);
+                button.Height = 70;
+
+                var levelLabel = new Label
+                {
+                    AutoSize = true,
+                    Font = new Font("Segoe UI", 9F, FontStyle.Bold),
+                    ForeColor = Color.FromArgb(34, 34, 59),
+                    Location = new Point(button.Left + 302, 98),
+                    Text = "Lv. 17"
+                };
+
+                var slider = new TrackBar
+                {
+                    AutoSize = false,
+                    Minimum = 1,
+                    Maximum = 20,
+                    Value = 17,
+                    TickFrequency = 1,
+                    SmallChange = 1,
+                    LargeChange = 1,
+                    Location = new Point(button.Left + 20, 82),
+                    Size = new Size(270, 48)
+                };
+                slider.Scroll += (_, _) => levelLabel.Text = $"Lv. {slider.Value}";
+
+                panel.Controls.Add(slider);
+                panel.Controls.Add(levelLabel);
+                sliders[index] = slider;
+            }
+
+            return sliders;
+        }
+
+        private static string FormatMonsterName(string className)
+        {
+            var name = new System.Text.StringBuilder(className.Length + 8);
+            for (int index = 0; index < className.Length; index++)
+            {
+                if (index > 0 && char.IsUpper(className[index]) &&
+                    (char.IsLower(className[index - 1]) ||
+                     (index + 1 < className.Length && char.IsLower(className[index + 1]))))
+                {
+                    name.Append(' ');
+                }
+
+                name.Append(className[index]);
+            }
+
+            return name.ToString();
+        }
+
+        private sealed record MonsterChoice(Type Type, string DisplayName)
+        {
+            public override string ToString() => DisplayName;
+        }
+    }
+}

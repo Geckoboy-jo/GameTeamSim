@@ -1,0 +1,266 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MySingingMonsters
+{
+    internal class Gauntlet
+    {
+        public Team PlayerTeam;
+       
+        public Element contains;
+        public int maxMonsters;
+        public int bedContains;
+        public int maxBeds;
+        public int requiredNumElements;
+        public int Iterations { get; set; } = 100000;
+        public int MonsterLevelCap { get; set; } = 20;
+        public bool natOnly;
+        public bool ethOnly;
+        public HashSet<string>? allowedElements;
+        public Wrapper wrapper;
+        public Gauntlet(Team player, Wrapper game)
+        {
+            PlayerTeam = player;
+            contains = new Element("None");
+            maxMonsters = 3;
+            bedContains = 0;
+            maxBeds = 20;
+            requiredNumElements = 0;
+            natOnly = false;
+            ethOnly = false;
+            wrapper = game;
+        }
+        public string runGauntlet()
+        {
+            int wins = 0;
+            int losses = 0;
+            var opponentsThatWon = new List<Monster>();
+
+            if (Iterations < 1)
+            {
+                throw new InvalidOperationException("A gauntlet must run at least one fight.");
+            }
+
+            if (maxMonsters < 1 || maxBeds < 1)
+            {
+                throw new InvalidOperationException("A gauntlet needs room for at least one opponent monster.");
+            }
+
+            for (int i = 0; i < Iterations; i++)
+            {
+                wrapper.Player = CreateFreshPlayerTeam();
+                List<Monster> enemyMonsters = CreateOpponentTeam();
+                wrapper.Opononent = new Team(enemyMonsters);
+
+                if (wrapper.game())
+                {
+                    wins++;
+                }
+                else
+                {
+                    losses++;
+                    opponentsThatWon.AddRange(enemyMonsters.Where(monster => monster.isAlive));
+                }
+            }
+
+            var top3Opponents = opponentsThatWon
+                .GroupBy(monster => monster.GetType())
+                .OrderByDescending(group => group.Count())
+                .Take(3)
+                .Select(group => group.Key);
+
+            return $"You won {wins} times and lost {losses} times. The most common monsters you lost to were: {string.Join(", ", top3Opponents)}";
+        }
+
+        private Team CreateFreshPlayerTeam()
+        {
+            List<Monster> monsters = PlayerTeam.Monsters
+                .Select(monster => (Monster)Activator.CreateInstance(monster.GetType(), monster.level)!)
+                .ToList();
+            return new Team(monsters);
+        }
+
+        private List<Monster> CreateOpponentTeam()
+        {
+            var monsters = new List<Monster>();
+            int bedsUsed = 0;
+
+            while (monsters.Count < maxMonsters && bedsUsed < maxBeds)
+            {
+                bool addedMonster = false;
+                for (int attempt = 0; attempt < 100; attempt++)
+                {
+                    Monster monster = wrapper.getRandomMonster(
+                        contains, natOnly, ethOnly, requiredNumElements);
+                    int monsterBeds = CalculateBeds(monster);
+                    if (bedsUsed + monsterBeds <= maxBeds)
+                    {
+                        monsters.Add(monster);
+                        bedsUsed += monsterBeds;
+                        addedMonster = true;
+                        break;
+                    }
+                }
+
+                if (!addedMonster)
+                {
+                    break;
+                }
+            }
+
+            if (monsters.Count == 0)
+            {
+                throw new InvalidOperationException("The selected gauntlet rules do not allow any opponent monsters.");
+            }
+
+            return monsters;
+        }
+
+        public int calculateBeds()
+        {
+            return PlayerTeam.Monsters.Sum(CalculateBeds);
+        }
+
+        public (List<Monster> Team, int WavesCleared, long TeamsEvaluated) CalculateBestTeam(
+            int teamMaxBeds,
+            IProgress<string>? progress = null)
+        {
+            const int maximumWaves = 500000;
+            const int maximumLosses = 10;
+
+            if (teamMaxBeds < 1)
+            {
+                throw new ArgumentOutOfRangeException(nameof(teamMaxBeds), "Team bed capacity must be at least one.");
+            }
+
+            Type[] monsterTypes = typeof(Monster).Assembly.GetTypes()
+                .Where(type => type.IsClass && !type.IsAbstract &&
+                    typeof(Monster).IsAssignableFrom(type) &&
+                    type.GetConstructor(new[] { typeof(int) }) is not null)
+                .ToArray();
+
+            var candidates = monsterTypes
+                .Select(type =>
+                {
+                    var monster = (Monster)Activator.CreateInstance(type, MonsterLevelCap)!;
+                    return (Type: type, Monster: monster, Beds: CalculateBeds(monster));
+                })
+                .Where(candidate => candidate.Beds <= teamMaxBeds && IsAllowedForTeam(candidate.Monster))
+                .ToArray();
+
+            if (candidates.Length == 0)
+            {
+                throw new InvalidOperationException("No monsters satisfy the selected team restrictions and bed limit.");
+            }
+
+            List<Type> selectedTypes = new();
+            List<Monster>? bestTeam = null;
+            int bestWaves = -1;
+            long teamsEvaluated = 0;
+            bool reachedMaximum = false;
+
+            void SearchCombinations(int startIndex, int bedsUsed)
+            {
+                if (selectedTypes.Count > 0)
+                {
+                    int waves = EvaluateTeam(selectedTypes, maximumWaves, maximumLosses);
+                    teamsEvaluated++;
+                    if (waves > bestWaves)
+                    {
+                        bestWaves = waves;
+                        bestTeam = selectedTypes
+                            .Select(type => (Monster)Activator.CreateInstance(type, MonsterLevelCap)!)
+                            .ToList();
+                    }
+
+                    if (waves == maximumWaves)
+                    {
+                        reachedMaximum = true;
+                    }
+                    else if (teamsEvaluated % 10 == 0)
+                    {
+                        progress?.Report($"Evaluated {teamsEvaluated:N0} teams; best result: {bestWaves:N0} waves.");
+                    }
+                }
+
+                if (selectedTypes.Count == 3 || reachedMaximum)
+                {
+                    return;
+                }
+
+                for (int index = startIndex; index < candidates.Length && !reachedMaximum; index++)
+                {
+                    int nextBeds = bedsUsed + candidates[index].Beds;
+                    if (nextBeds > teamMaxBeds)
+                    {
+                        continue;
+                    }
+
+                    selectedTypes.Add(candidates[index].Type);
+                    SearchCombinations(index + 1, nextBeds);
+                    selectedTypes.RemoveAt(selectedTypes.Count - 1);
+                }
+            }
+
+            SearchCombinations(0, 0);
+            if (bestTeam is null)
+            {
+                throw new InvalidOperationException("No eligible teams could be evaluated.");
+            }
+
+            return (bestTeam, bestWaves, teamsEvaluated);
+        }
+
+        private bool IsAllowedForTeam(Monster monster)
+        {
+            bool matchesElement = string.Equals(contains.name, "None", StringComparison.OrdinalIgnoreCase) ||
+                monster.elems.Any(element => string.Equals(element.name, contains.name, StringComparison.OrdinalIgnoreCase));
+            bool matchesCategory = (!natOnly || monster.elems.All(element => !element.isEtherial)) &&
+                (!ethOnly || monster.elems.All(element => element.isEtherial));
+            bool matchesAllowedElements = allowedElements is null || monster.elems.All(element =>
+                allowedElements.Contains(element.name, StringComparer.OrdinalIgnoreCase));
+            return matchesElement && matchesCategory && matchesAllowedElements;
+        }
+
+        private int EvaluateTeam(IReadOnlyList<Type> monsterTypes, int maximumWaves, int maximumLosses)
+        {
+            int wins = 0;
+            int losses = 0;
+
+            for (int wave = 0; wave < maximumWaves && losses <= maximumLosses; wave++)
+            {
+                wrapper.Player = new Team(monsterTypes
+                    .Select(type => (Monster)Activator.CreateInstance(type, MonsterLevelCap)!)
+                    .ToList());
+                wrapper.Opononent = new Team(CreateOpponentTeam());
+                if (wrapper.game())
+                {
+                    wins++;
+                }
+                else
+                {
+                    losses++;
+                }
+            }
+
+            return wins;
+        }
+
+        private static int CalculateBeds(Monster monster)
+        {
+            int beds = monster.elems.Count;
+            if (monster.elems.Any(element => string.Equals(element.name, "Seasonal", StringComparison.OrdinalIgnoreCase)))
+            {
+                beds++;
+            }
+
+            beds += monster.elems.Count(element => element.isEtherial) * 4;
+            return beds;
+        }
+    }
+}

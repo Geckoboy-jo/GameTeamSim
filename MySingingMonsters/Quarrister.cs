@@ -11,7 +11,7 @@ namespace MySingingMonsters
         public Quarrister(int Level)
         {
             baseHp = 1500;
-                        baseAttack = 275;
+            baseAttack = 275;
             level = Level;
             setStats();
             elems = new List<Element>();
