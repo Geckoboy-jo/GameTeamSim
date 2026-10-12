@@ -23,10 +23,10 @@ namespace MySingingMonsters
             elems.Add(new Element("Water"));
             elems.Add(new Element("Air"));
             attacks = new List<Attack>();
-            attacks.Add(new Attack("windWhistle", new Element("None"), 1  ));
-            if (level >= 5) attacks.Add(new Attack("Take off hoser", new Element("Water"), 1.05f));
+            attacks.Add(new Attack("Wild Whistle", new Element("None"), 1  ));
+            if (level >= 5) attacks.Add(new Attack("Take Off, Hoser", new Element("Water"), 1.05f));
             if (level >= 10) attacks.Add(new Attack("Pulpy Pucker", new Element("Plant"), 1.12f));
-            if (level >= 15) attacks.Add(new Attack("Shrill Self", new Element("Air"), 1.15f));
+            if (level >= 15) attacks.Add(new Attack("Shrill Siffleur", new Element("Air"), 1.15f));
 
         }
     }

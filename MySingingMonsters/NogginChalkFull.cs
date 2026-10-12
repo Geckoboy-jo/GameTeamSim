@@ -18,8 +18,8 @@ namespace MySingingMonsters
             elems = new List<Element>();
             elems.Add(new Element("Earth"));
             attacks = new List<Attack>();
-            attacks.Add(new Attack("ChalkFull", new Element("None"), 1.1f));
-            if (level >= 5) attacks.Add(new Attack("EarthBeat", new Element("Earth"), 1.19f));
+            attacks.Add(new Attack("Chalk-full", new Element("None"), 1.1f));
+            if (level >= 5) attacks.Add(new Attack("Earthbeat", new Element("Earth"), 1.19f));
 
         }
     }

@@ -11,7 +11,7 @@ namespace MySingingMonsters
         public Bowgart(int Level)
         {
             baseHp = 590;
-                        baseAttack = 225;
+            baseAttack = 225;
             level = Level;
             setStats();
             elems = new List<Element>();

@@ -1,0 +1,26 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MySingingMonsters
+{
+    internal class MammotBunceCap : Monster
+    {
+        public MammotBunceCap(int Level)
+        {
+            baseHp = 225;
+            baseAttack = 75;
+            level = Level;
+            setStats();
+            elems = new List<Element>();
+            elems.Add(new Element("Cold"));
+            attacks = new List<Attack>();
+            attacks.Add(new Attack("Hoarse Holler", new Element("None"), 1));
+            if (level >= 10) attacks.Add(new Attack("Bunce Cap", new Element("Plant"), 1.1f));
+            if (level >= 5) attacks.Add(new Attack("Snow Bawl", new Element("Cold"), 1.2f));
+
+        }
+    }
+}

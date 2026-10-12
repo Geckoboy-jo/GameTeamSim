@@ -19,7 +19,7 @@ namespace MySingingMonsters
             elems.Add(new Element("Cold"));
             attacks = new List<Attack>();
             attacks.Add(new Attack("Water Buff-a-low", new Element("Water"), 1));
-            if (level >= 5) attacks.Add(new Attack("Snow Brawl", new Element("Cold"), 1.2f));
+            if (level >= 5) attacks.Add(new Attack("Snow Bawl", new Element("Cold"), 1.2f));
 
         }
     }

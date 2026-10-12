@@ -19,7 +19,7 @@ namespace MySingingMonsters
             elems.Add(new Element("Earth"));
             attacks = new List<Attack>();
             attacks.Add(new Attack("Paradiddle", new Element("None"), 1));
-            if (level >= 5) attacks.Add(new Attack("Kinetic kicks", new Element("Earth"), 1.25f));
+            if (level >= 5) attacks.Add(new Attack("Kinetic Kicks", new Element("Earth"), 1.25f));
 
         }
     }

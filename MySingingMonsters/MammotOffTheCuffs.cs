@@ -18,8 +18,8 @@ namespace MySingingMonsters
             elems = new List<Element>();
             elems.Add(new Element("Cold"));
             attacks = new List<Attack>();
-            attacks.Add(new Attack("off the cuffs", new Element("None"), 1.2f));
-            if (level >= 5) attacks.Add(new Attack("Snow Brawl", new Element("Cold"), 1.2f));
+            attacks.Add(new Attack("Off the Cuffs", new Element("None"), 1.2f));
+            if (level >= 5) attacks.Add(new Attack("Snow Bawl", new Element("Cold"), 1.2f));
 
         }
     }
