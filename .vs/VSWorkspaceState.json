@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\.github"
+    "\\.github",
+    "\\PokemonGen1"
   ],
+  "SelectedNode": "\\.github",
   "PreviewInSolutionExplorer": false
 }
