@@ -8,4 +8,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="Data\gen1-red-blue.json" LogicalName="PokemonGen1.gen1-red-blue.json" />
+  </ItemGroup>
+
 </Project>

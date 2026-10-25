@@ -1,0 +1,17 @@
+C:\Users\midge\Documents\GitHub\gameTeam\GameTeamSim\PokemonGen1\obj\Debug\net8.0-windows\PokemonGen1.Form1.resources
+C:\Users\midge\Documents\GitHub\gameTeam\GameTeamSim\PokemonGen1\obj\Debug\net8.0-windows\PokemonGen1.csproj.GenerateResource.cache
+C:\Users\midge\Documents\GitHub\gameTeam\GameTeamSim\PokemonGen1\obj\Debug\net8.0-windows\PokemonGen1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\midge\Documents\GitHub\gameTeam\GameTeamSim\PokemonGen1\obj\Debug\net8.0-windows\PokemonGen1.AssemblyInfoInputs.cache
+C:\Users\midge\Documents\GitHub\gameTeam\GameTeamSim\PokemonGen1\obj\Debug\net8.0-windows\PokemonGen1.AssemblyInfo.cs
+C:\Users\midge\Documents\GitHub\gameTeam\GameTeamSim\PokemonGen1\obj\Debug\net8.0-windows\PokemonGen1.csproj.CoreCompileInputs.cache
+C:\Users\midge\Documents\GitHub\gameTeam\GameTeamSim\PokemonGen1\obj\Debug\net8.0-windows\PokemonGen1.sourcelink.json
+C:\Users\midge\Documents\GitHub\gameTeam\GameTeamSim\PokemonGen1\bin\Debug\net8.0-windows\PokemonGen1.exe
+C:\Users\midge\Documents\GitHub\gameTeam\GameTeamSim\PokemonGen1\bin\Debug\net8.0-windows\PokemonGen1.deps.json
+C:\Users\midge\Documents\GitHub\gameTeam\GameTeamSim\PokemonGen1\bin\Debug\net8.0-windows\PokemonGen1.runtimeconfig.json
+C:\Users\midge\Documents\GitHub\gameTeam\GameTeamSim\PokemonGen1\bin\Debug\net8.0-windows\PokemonGen1.dll
+C:\Users\midge\Documents\GitHub\gameTeam\GameTeamSim\PokemonGen1\bin\Debug\net8.0-windows\PokemonGen1.pdb
+C:\Users\midge\Documents\GitHub\gameTeam\GameTeamSim\PokemonGen1\obj\Debug\net8.0-windows\PokemonGen1.dll
+C:\Users\midge\Documents\GitHub\gameTeam\GameTeamSim\PokemonGen1\obj\Debug\net8.0-windows\refint\PokemonGen1.dll
+C:\Users\midge\Documents\GitHub\gameTeam\GameTeamSim\PokemonGen1\obj\Debug\net8.0-windows\PokemonGen1.pdb
+C:\Users\midge\Documents\GitHub\gameTeam\GameTeamSim\PokemonGen1\obj\Debug\net8.0-windows\PokemonGen1.genruntimeconfig.cache
+C:\Users\midge\Documents\GitHub\gameTeam\GameTeamSim\PokemonGen1\obj\Debug\net8.0-windows\ref\PokemonGen1.dll
