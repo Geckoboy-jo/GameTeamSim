@@ -23,10 +23,11 @@ namespace PokemonGen1
         private int baseDefense { get; set; }
         private int defense { get; set; }
         private int currentDefense { get; set; }
-        private List<Type> types { get; set; }
+        private List<Element> types { get; set; }
         private StatChangeManager statChanges { get; set; }
         private StatusCondition statusCondition { get; set; }
         private List<Move> moves { get; set; }
+        private bool isLegendary { get; set; }
 
         //getters and setters
         public int getLevel() { return level; }
@@ -45,10 +46,11 @@ namespace PokemonGen1
         public int getDefense() { return defense; }
         public int getBaseDefense() { return baseDefense; }
         public int getCurrentDefense() { return currentDefense; }
-        public List<Type> getTypes() { return types; }
+        public List<Element> getTypes() { return types; }
         public StatChangeManager getStatChanges() { return statChanges; }
         public StatusCondition getStatusCondition() { return statusCondition; }
         public List<Move> getMoves() { return moves; }
+        public bool getIsLegendary() { return isLegendary; }
 
         public void setLevel(int value) { level = value; }
         public void setName(string value) { name = value; }
@@ -62,14 +64,16 @@ namespace PokemonGen1
         public void setSpeed(int value) { speed = value; }
         public void setCurrentAttack(int value) { currentAttack = value; }
         public void setAttack(int value) { attack = value; }
+        public void setDefense(int value) { defense = value; }
+        public void setCurrentDefense(int value) { currentDefense = value; }
         public void setCurrentSpeed(int value) { currentSpeed = value; }
         public void setBaseAttack(int value) { baseAttack = value; }
-        public void setCurrentDefense(int value) { currentDefense = value; }
         public void setBaseDefense(int value) { baseDefense = value; }
-        public void setTypes(List<Type> value) { types = value; }
+        public void setTypes(List<Element> value) { types = value; }
         public void setStatChanges(StatChangeManager value) { statChanges = value; }
         public void setStatusCondition(StatusCondition value) { statusCondition = value; }
         public void setMoves(List<Move> value) { moves = value; }
+        public void setIsLegendary(bool value) { isLegendary = value; }
 
         // member functions
         public void takeDamage(int damage)
@@ -121,9 +125,10 @@ namespace PokemonGen1
         public Pokemon()
         {
             statChanges = new StatChangeManager();
-            types = new List<Type>();
+            types = new List<Element>();
             moves = new List<Move>();
             statusCondition = new NoStatus(this);
+            isLegendary = false;
         }
         public bool hasType(string type)
         {

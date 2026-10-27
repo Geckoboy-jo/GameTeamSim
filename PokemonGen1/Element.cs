@@ -1,6 +1,6 @@
 namespace PokemonGen1
 {
-    public class Type : IEquatable<Type>
+    public class Element : IEquatable<Element>
     {
         private static readonly IReadOnlyDictionary<string, string[]> ResistedTypes =
             new Dictionary<string, string[]>(StringComparer.Ordinal)
@@ -53,9 +53,9 @@ namespace PokemonGen1
             };
 
         private string name = string.Empty;
-        private List<Type> weaknesses = new();
-        private List<Type> strengths = new();
-        private List<Type> immunities = new();
+        private List<Element> weaknesses = new();
+        private List<Element> strengths = new();
+        private List<Element> immunities = new();
 
         public string getName() { return name; }
 
@@ -67,12 +67,12 @@ namespace PokemonGen1
             immunities = setImmunities(name);
         }
 
-        public Type(string typeName)
+        public Element(string typeName)
         {
             setName(typeName);
         }
 
-        private Type(string typeName, bool initializeMatchups)
+        private Element (string typeName, bool initializeMatchups)
         {
             name = typeName;
             if (!initializeMatchups)
@@ -83,26 +83,26 @@ namespace PokemonGen1
             immunities = setImmunities(typeName);
         }
 
-        public List<Type> setWeaknesses(string typeName)
+        public List<Element> setWeaknesses(string typeName)
         {
             return CreateTypes(ResistedTypes, typeName);
         }
 
-        public List<Type> setStrengths(string typeName)
+        public List<Element> setStrengths(string typeName)
         {
             return CreateTypes(SuperEffectiveTypes, typeName);
         }
 
-        public List<Type> setImmunities(string typeName)
+        public List<Element> setImmunities(string typeName)
         {
             return CreateTypes(ImmuneTypes, typeName);
         }
 
-        public List<Type> getWeaknesses() { return weaknesses; }
-        public List<Type> getStrengths() { return strengths; }
-        public List<Type> getImmunities() { return immunities; }
+        public List<Element> getWeaknesses() { return weaknesses; }
+        public List<Element> getStrengths() { return strengths; }
+        public List<Element> getImmunities() { return immunities; }
 
-        public double calculateEffectiveness(Type targetType)
+        public double calculateEffectiveness(Element targetType)
         {
             if (ContainsType(immunities, targetType.name))
                 return 0;
@@ -113,14 +113,14 @@ namespace PokemonGen1
             return 1;
         }
 
-        public bool Equals(Type? other)
+        public bool Equals(Element? other)
         {
             return other != null && name == other.name;
         }
 
         public override bool Equals(object? obj)
         {
-            return obj is Type other && Equals(other);
+            return obj is Element other && Equals(other);
         }
 
         public override int GetHashCode()
@@ -128,15 +128,15 @@ namespace PokemonGen1
             return StringComparer.Ordinal.GetHashCode(name);
         }
 
-        private static List<Type> CreateTypes(IReadOnlyDictionary<string, string[]> chart, string typeName)
+        private static List<Element> CreateTypes(IReadOnlyDictionary<string, string[]> chart, string typeName)
         {
             if (!chart.TryGetValue(typeName, out string[]? matchups))
-                return new List<Type>();
+                return new List<Element>();
 
-            return matchups.Select(name => new Type(name, false)).ToList();
+            return matchups.Select(name => new Element(name, false)).ToList();
         }
 
-        private static bool ContainsType(IEnumerable<Type> types, string typeName)
+        private static bool ContainsType(IEnumerable<Element> types, string typeName)
         {
             return types.Any(type => type.name == typeName);
         }

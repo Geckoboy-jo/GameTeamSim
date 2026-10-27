@@ -22,6 +22,7 @@ namespace PokemonGen1
         public int getMemberCount(){return members.Count;}
         public Pokemon getActiveMember(){return activeMember;}
         public void setActiveMember(Pokemon p){activeMember = p;}
+        public bool isFull(){return members.Count >= 6;}
 
     }
 }
