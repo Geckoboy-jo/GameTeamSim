@@ -83,7 +83,7 @@ namespace PokemonGen1
                     getCaster().getStatChanges().applyStatChange("Evasion", 1);
                     break;
                 case "PARALYZE_EFFECT":
-                    ApplyStatus(target, "Ground", () => new Paralyzed());
+                    ApplyStatus(target, getType().getName() == "Electric" ? "Ground" : null, () => new Paralyzed());
                     break;
                 case "POISON_EFFECT":
                     ApplyStatus(target, "Poison", () => new Poison());
@@ -96,11 +96,11 @@ namespace PokemonGen1
                     ApplyStatus(target, "Fire", () => new Burn(target));
                     break;
                 case "FREEZE_SIDE_EFFECT1":
-                    ApplyStatus(target, "Ice", () => new Frozen());
+                    ApplyStatus(target, null, () => new Frozen());
                     break;
                 case "PARALYZE_SIDE_EFFECT1":
                 case "PARALYZE_SIDE_EFFECT2":
-                    ApplyStatus(target, "Ground", () => new Paralyzed());
+                    ApplyStatus(target, getType().getName() == "Electric" ? "Ground" : null, () => new Paralyzed());
                     break;
                 case "POISON_SIDE_EFFECT1":
                 case "POISON_SIDE_EFFECT2":
@@ -110,7 +110,8 @@ namespace PokemonGen1
                     getCaster().heal(damage / 2);
                     break;
                 case "RECOIL_EFFECT":
-                    getCaster().takeDamage(damage / 4);
+                    if (damage > 0)
+                        getCaster().takeDamage(Math.Max(1, damage / 4));
                     break;
                 case "HEAL_EFFECT":
                     getCaster().heal(getCaster().getMaxHp() / 2);

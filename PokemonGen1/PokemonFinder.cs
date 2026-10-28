@@ -9,7 +9,7 @@ namespace PokemonGen1
 
 
 
-        public void FillTeam(Team team){ while(team.isFull() == false) team.addMember(getRandomPokemon(new Random().Next(1, 101)));}
+        public void FillTeam(Team team, int level){ while(team.isFull() == false) team.addMember(getRandomPokemon(level));}
         public PokemonFinder(string newCatagory)
         {
             this.catagory = newCatagory;

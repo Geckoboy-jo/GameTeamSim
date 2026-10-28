@@ -105,6 +105,12 @@ namespace PokemonGen1
             "REFLECT_EFFECT"
         };
 
+        private static readonly string[] Gen1Types =
+        [
+            "Normal", "Fire", "Water", "Electric", "Grass", "Ice", "Fighting",
+            "Poison", "Ground", "Flying", "Psychic", "Bug", "Rock", "Ghost", "Dragon"
+        ];
+
         private readonly Random random;
         private readonly TrainerMoveSelectionModifications modifications;
 
@@ -116,6 +122,55 @@ namespace PokemonGen1
         {
             this.random = random ?? Random.Shared;
             modifications = GetModifications(trainerClass);
+        }
+
+        public IReadOnlyList<Move> SelectBestMoves(
+            Pokemon pokemon,
+            IReadOnlyList<Move> availableMoves,
+            int moveCount = 4)
+        {
+            ArgumentNullException.ThrowIfNull(pokemon);
+            ArgumentNullException.ThrowIfNull(availableMoves);
+            if (moveCount is < 1 or > 4)
+                throw new ArgumentOutOfRangeException(nameof(moveCount), "Generation I Pokémon can have one to four moves.");
+            if (availableMoves.Any(move => move is null))
+                throw new ArgumentException("Available moves cannot contain null.", nameof(availableMoves));
+
+            var candidates = availableMoves
+                .GroupBy(move => move.getName(), StringComparer.Ordinal)
+                .Select(group => group.First())
+                .ToList();
+            if (candidates.Count <= moveCount)
+                return candidates.AsReadOnly();
+
+            var selected = new List<Move>(moveCount);
+            while (selected.Count < moveCount)
+            {
+                double bestScore = double.MinValue;
+                var bestCandidates = new List<Move>();
+                foreach (Move candidate in candidates)
+                {
+                    if (selected.Contains(candidate))
+                        continue;
+
+                    double score = ScoreMove(candidate, pokemon, selected);
+                    if (score > bestScore)
+                    {
+                        bestScore = score;
+                        bestCandidates.Clear();
+                        bestCandidates.Add(candidate);
+                    }
+                    else if (Math.Abs(score - bestScore) < 0.001)
+                    {
+                        bestCandidates.Add(candidate);
+                    }
+                }
+
+                Move selectedMove = bestCandidates[random.Next(bestCandidates.Count)];
+                selected.Add(selectedMove);
+            }
+
+            return selected.AsReadOnly();
         }
 
         public Move ChooseMove(
@@ -175,6 +230,81 @@ namespace PokemonGen1
             return selectedMove;
         }
 
+        private static double ScoreMove(Move move, Pokemon pokemon, IReadOnlyList<Move> selected)
+        {
+            double score = 0;
+            bool isDamaging = move.getPower() > 0;
+            bool isStab = pokemon.getTypes().Any(type => type.getName() == move.getType().getName());
+
+            if (isDamaging)
+            {
+                double attackingStat = move.getIsSpecial()
+                    ? pokemon.getSpecial()
+                    : pokemon.getCurrentAttack();
+                score += move.getPower() * (move.getAccuracy() / 100.0);
+                score *= Math.Clamp(attackingStat / 100.0, 0.75, 1.5);
+                if (isStab)
+                    score += 25;
+                if (move.getAccuracy() < 80)
+                    score -= (80 - move.getAccuracy()) * 0.35;
+            }
+            else
+            {
+                score += 12;
+            }
+
+            score += GetEffectScore(move);
+            score += GetCoverageScore(move, selected);
+            if (selected.Any(other => other.getType().getName() == move.getType().getName()))
+                score -= isDamaging ? 8 : 4;
+
+            return score;
+        }
+
+        private static double GetCoverageScore(Move move, IReadOnlyList<Move> selected)
+        {
+            if (move.getPower() == 0 && !HasMeaningfulEffect(move))
+                return -30;
+
+            double score = 0;
+            foreach (string targetType in Gen1Types)
+            {
+                double effectiveness = move.getType().calculateEffectiveness(new Element(targetType));
+                if (effectiveness <= 1)
+                    continue;
+
+                bool alreadyCovered = selected.Any(selectedMove =>
+                    selectedMove.getPower() > 0
+                    && selectedMove.getType().calculateEffectiveness(new Element(targetType)) > 1);
+                if (!alreadyCovered)
+                    score += effectiveness == 4 ? 12 : 7;
+            }
+
+            return score;
+        }
+
+        private static double GetEffectScore(Move move)
+        {
+            string effect = move.getEffect();
+            if (StatusAilmentEffects.Contains(effect) || effect.Contains("STATUS", StringComparison.Ordinal))
+                return 22;
+            if (effect is "SUPER_FANG_EFFECT" or "SPECIAL_DAMAGE_EFFECT")
+                return 28;
+            if (effect is "HEAL_EFFECT" or "DRAIN_HP_EFFECT")
+                return 24;
+            if (effect.Contains("SIDE_EFFECT", StringComparison.Ordinal))
+                return 10;
+            if (EncouragedEffects.Contains(effect))
+                return 14;
+            return 0;
+        }
+
+        private static bool HasMeaningfulEffect(Move move)
+        {
+            return !string.IsNullOrEmpty(move.getEffect())
+                && move.getEffect() is not "NO_EFFECT";
+        }
+
         private static void AdjustForTypeEffectiveness(IReadOnlyList<Move> moves, Pokemon target, int[] scores)
         {
             for (int i = 0; i < moves.Count; i++)
@@ -190,7 +320,7 @@ namespace PokemonGen1
         private static double GetTypeEffectiveness(Move move, Pokemon target)
         {
             double effectiveness = 1;
-            foreach (Type defenderType in target.getTypes())
+            foreach (Element defenderType in target.getTypes())
                 effectiveness *= move.getType().calculateEffectiveness(defenderType);
             return effectiveness;
         }

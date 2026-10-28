@@ -22,17 +22,18 @@ namespace PokemonGen1
 
             setName(species.Name);
             setLevel(level);
-            setTypes(species.Types.Select(type => new Type(type)).ToList());
+            setTypes(species.Types.Select(type => new Element(type)).ToList());
             setBaseHp(species.BaseStats.Hp);
             setBaseAttack(species.BaseStats.Attack);
             setBaseDefense(species.BaseStats.Defense);
             setBaseSpeed(species.BaseStats.Speed);
             setBaseSpecial(species.BaseStats.Special);
-            setMoves(Gen1Catalog.GetAvailableMoves(species.Name, level)
+            List<Move> availableMoves = Gen1Catalog.GetAvailableMoves(species.Name, level)
                 .Select(move => Gen1Catalog.CreateMove(move.Name))
-                .ToList());
+                .ToList();
             setStats();
             setCurrentHp(getMaxHp());
+            setMoves(new AIEngine().SelectBestMoves(this, availableMoves).ToList());
         }
     }
 }

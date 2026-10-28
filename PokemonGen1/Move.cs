@@ -4,7 +4,7 @@ namespace PokemonGen1
     {
         private int power;
         private int accuracy;
-        private Type type = new Type("Normal");
+        private Element type = new Element("Normal");
         private Pokemon? caster;
         private Team? teamEffected;
         private Pokemon? target;
@@ -21,14 +21,14 @@ namespace PokemonGen1
         
         public int getPower() { return power; }
         public int getAccuracy() { return accuracy; }
-        public Type getType() { return type; }
+        public Element getType() { return type; }
         public Team getTeamEffected() { return teamEffected ?? throw new InvalidOperationException("The affected team has not been set."); }
         public Pokemon getCaster() { return caster ?? throw new InvalidOperationException("The move caster has not been set."); }
         public Pokemon getTarget() { return target ?? throw new InvalidOperationException("The move target has not been set."); }
 
         public void setPower(int power) { this.power = power; }
         public void setAccuracy(int accuracy) { this.accuracy = accuracy; }
-        public void setType(Type type)
+        public void setType(Element type)
         {
             this.type = type;
             isSpecial = type.getName() is "Fire" or "Water" or "Grass" or "Electric" or "Ice" or "Psychic" or "Dragon";
@@ -43,7 +43,7 @@ namespace PokemonGen1
             setAccuracy(move.Accuracy);
             setPP(move.Pp);
             setEffect(move.Effect);
-            setType(new Type(move.Type));
+            setType(new Element(move.Type));
         }
         public void setTeamEffected(Team teamEffected) { this.teamEffected = teamEffected; }
         public void setCaster(Pokemon caster) { this.caster = caster; }
@@ -60,11 +60,11 @@ namespace PokemonGen1
             double attack = isSpecial ? moveCaster.getSpecial() * moveCaster.getStatChanges().getSpecialMultiplier() : moveCaster.getCurrentAttack() * moveCaster.getStatChanges().getAttackMultiplier();
             double defense = isSpecial ? moveTarget.getSpecial() * moveTarget.getStatChanges().getSpecialMultiplier() : moveTarget.getCurrentDefense() * moveTarget.getStatChanges().getDefenseMultiplier();
             double baseDamage = (((2 * moveCaster.getLevel() * criticalMultiplier(moveCaster) / 5 + 2) * power * attack / defense) / 50) + 2;
-            foreach (Type targetType in moveTarget.getTypes())
+            foreach (Element targetType in moveTarget.getTypes())
             {
                 baseDamage *= type.calculateEffectiveness(targetType);
             }
-            foreach(Type casterType in moveCaster.getTypes())
+            foreach(Element  casterType in moveCaster.getTypes())
             {
                 if(casterType.getName() == type.getName())
                 {
