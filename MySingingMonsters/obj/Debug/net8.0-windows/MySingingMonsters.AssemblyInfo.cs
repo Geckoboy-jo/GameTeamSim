@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MSMBattleSim")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0024135d93fc91116e2bb03b849abdf0a22edef3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fa18988e7553a1c7f05c2c4c0b725e15b089f35a")]
 [assembly: System.Reflection.AssemblyProductAttribute("MSMBattleSim")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MSMBattleSim")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,7 +1,24 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\midge\\source\\repos\\GameTeamSim\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\midge\\Documents\\GitHub\\gameTeam\\GameTeamSim\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\midge\\Documents\\GitHub\\gameTeam\\GameTeamSim\\PokemonGen1\\type.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:PokemonGen1\\type.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\midge\\Documents\\GitHub\\gameTeam\\GameTeamSim\\PokemonGen1\\pokemon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:PokemonGen1\\pokemon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8104CEB4-A81E-4E7B-BC9E-02F65813256C}|PokemonGen1\\PokemonGen1.csproj|c:\\users\\midge\\documents\\github\\gameteam\\gameteamsim\\pokemongen1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8104CEB4-A81E-4E7B-BC9E-02F65813256C}|PokemonGen1\\PokemonGen1.csproj|solutionrelative:pokemongen1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8104CEB4-A81E-4E7B-BC9E-02F65813256C}|PokemonGen1\\PokemonGen1.csproj|c:\\users\\midge\\documents\\github\\gameteam\\gameteamsim\\pokemongen1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{8104CEB4-A81E-4E7B-BC9E-02F65813256C}|PokemonGen1\\PokemonGen1.csproj|solutionrelative:pokemongen1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +26,62 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "type.cs",
+              "DocumentMoniker": "C:\\Users\\midge\\Documents\\GitHub\\gameTeam\\GameTeamSim\\PokemonGen1\\type.cs",
+              "RelativeDocumentMoniker": "PokemonGen1\\type.cs",
+              "ToolTip": "C:\\Users\\midge\\Documents\\GitHub\\gameTeam\\GameTeamSim\\PokemonGen1\\type.cs",
+              "RelativeToolTip": "PokemonGen1\\type.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAACQAAACJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T07:13:04.844Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "pokemon.cs",
+              "DocumentMoniker": "C:\\Users\\midge\\Documents\\GitHub\\gameTeam\\GameTeamSim\\PokemonGen1\\pokemon.cs",
+              "RelativeDocumentMoniker": "PokemonGen1\\pokemon.cs",
+              "ToolTip": "C:\\Users\\midge\\Documents\\GitHub\\gameTeam\\GameTeamSim\\PokemonGen1\\pokemon.cs",
+              "RelativeToolTip": "PokemonGen1\\pokemon.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T07:02:25.18Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\midge\\Documents\\GitHub\\gameTeam\\GameTeamSim\\PokemonGen1\\Form1.cs",
+              "RelativeDocumentMoniker": "PokemonGen1\\Form1.cs",
+              "ToolTip": "C:\\Users\\midge\\Documents\\GitHub\\gameTeam\\GameTeamSim\\PokemonGen1\\Form1.cs",
+              "RelativeToolTip": "PokemonGen1\\Form1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T07:02:23.363Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\midge\\Documents\\GitHub\\gameTeam\\GameTeamSim\\PokemonGen1\\Form1.cs",
+              "RelativeDocumentMoniker": "PokemonGen1\\Form1.cs",
+              "ToolTip": "C:\\Users\\midge\\Documents\\GitHub\\gameTeam\\GameTeamSim\\PokemonGen1\\Form1.cs [Design]",
+              "RelativeToolTip": "PokemonGen1\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T07:01:19.497Z",
+              "EditorCaption": " [Design]"
             }
           ]
         }
