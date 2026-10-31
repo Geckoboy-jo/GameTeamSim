@@ -30,7 +30,8 @@ namespace MySingingMonsters
             bool EtherealOnly,
             int PlayerLevelCap,
             int OpponentLevelCap,
-            bool AllowDuplicates);
+            bool AllowDuplicates,
+            Type? MustContainType);
 
         public Form1()
         {
@@ -247,6 +248,9 @@ namespace MySingingMonsters
             gauntlet.ethOnly = settings.EtherealOnly;
             gauntlet.PlayerLevelCap = settings.PlayerLevelCap;
             gauntlet.OpponentLevelCap = settings.OpponentLevelCap;
+            gauntlet.setMustContain(settings.MustContainType is null
+                ? null
+                : (Monster)Activator.CreateInstance(settings.MustContainType, settings.OpponentLevelCap)!);
         }
 
         private static GauntletSettings? ShowGauntletSettingsDialog(
@@ -319,17 +323,31 @@ namespace MySingingMonsters
             categoryInput.Items.AddRange(new object[] { "Any", "Natural only", "Ethereal only" });
             categoryInput.SelectedIndex = 0;
 
+            var mustContainLabel = new Label { AutoSize = true, Location = new Point(18, 248), Text = "Must contain monster:" };
+            var mustContainInput = new ComboBox
+            {
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                Location = new Point(190, 244),
+                Width = 200
+            };
+            mustContainInput.Items.Add("None");
+            foreach (Type monsterType in GetMonsterTypes())
+            {
+                mustContainInput.Items.Add(new MonsterChoice(monsterType, FormatMonsterName(monsterType.Name)));
+            }
+            mustContainInput.SelectedIndex = 0;
+
             var elementsLabel = new Label
             {
                 AutoSize = true,
-                Location = new Point(18, 246),
+                Location = new Point(18, 284),
                 Text = "Required elements (each selected element must be present):"
             };
             var elementsInput = new CheckedListBox
             {
                 CheckOnClick = true,
-                Location = new Point(18, 270),
-                Size = new Size(404, 235)
+                Location = new Point(18, 308),
+                Size = new Size(404, 197)
             };
             elementsInput.Items.AddRange(ElementNames.Cast<object>().ToArray());
 
@@ -359,7 +377,7 @@ namespace MySingingMonsters
             {
                 bedsLabel, bedsInput, maxMonstersLabel, maxMonstersInput, elementCountLabel, elementCountInput,
                 playerLevelLabel, playerLevelInput, opponentLevelLabel, opponentLevelInput,
-                categoryLabel, categoryInput,
+                categoryLabel, categoryInput, mustContainLabel, mustContainInput,
                 elementsLabel, elementsInput, okButton, cancelButton
             });
             if (includeAllowDuplicates)
@@ -375,6 +393,9 @@ namespace MySingingMonsters
             }
 
             string[] allowedElements = elementsInput.CheckedItems.Cast<string>().ToArray();
+            Type? mustContainType = mustContainInput.SelectedItem is MonsterChoice mustContainChoice
+                ? mustContainChoice.Type
+                : null;
             return new GauntletSettings(
                 decimal.ToInt32(bedsInput.Value),
                 decimal.ToInt32(maxMonstersInput.Value),
@@ -384,7 +405,8 @@ namespace MySingingMonsters
                 categoryInput.SelectedIndex == 2,
                 decimal.ToInt32(playerLevelInput.Value),
                 decimal.ToInt32(opponentLevelInput.Value),
-                allowDuplicatesInput.Checked);
+                allowDuplicatesInput.Checked,
+                mustContainType);
         }
 
         private static void ShowBestTeamResultsDialog(IWin32Window owner, string summary, IReadOnlyList<string> teams)
@@ -462,12 +484,7 @@ namespace MySingingMonsters
         {
             Type?[] teamTypes = isOpponent ? opponentMonsterTypes : playerMonsterTypes;
             Button[] teamButtons = isOpponent ? opponentButtons : playerButtons;
-            Type[] monsterTypes = typeof(Monster).Assembly.GetTypes()
-                .Where(type => type.IsClass && !type.IsAbstract &&
-                    typeof(Monster).IsAssignableFrom(type) &&
-                    type.GetConstructor(new[] { typeof(int) }) is not null)
-                .OrderBy(type => FormatMonsterName(type.Name))
-                .ToArray();
+            Type[] monsterTypes = GetMonsterTypes();
 
             using var picker = new Form
             {
@@ -606,6 +623,16 @@ namespace MySingingMonsters
             }
 
             return sliders;
+        }
+
+        private static Type[] GetMonsterTypes()
+        {
+            return typeof(Monster).Assembly.GetTypes()
+                .Where(type => type.IsClass && !type.IsAbstract &&
+                    typeof(Monster).IsAssignableFrom(type) &&
+                    type.GetConstructor(new[] { typeof(int) }) is not null)
+                .OrderBy(type => FormatMonsterName(type.Name))
+                .ToArray();
         }
 
         private static string FormatMonsterName(string className)

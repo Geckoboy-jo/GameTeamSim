@@ -24,6 +24,7 @@ namespace MySingingMonsters
         public int OpponentLevelCap { get; set; } = 20;
         public bool natOnly;
         public bool ethOnly;
+        private Monster? mustContain;
         public HashSet<string>? allowedElements;
         public Wrapper wrapper;
         public Gauntlet(Team player, Wrapper game)
@@ -38,6 +39,9 @@ namespace MySingingMonsters
             ethOnly = false;
             wrapper = game;
         }
+
+        public Monster? getMustContain(){return mustContain;}
+        public void setMustContain(Monster? monster){mustContain = monster;}
         public string runGauntlet()
         {
             int wins = 0;
@@ -52,6 +56,12 @@ namespace MySingingMonsters
             if (maxMonsters < 1 || maxBeds < 1)
             {
                 throw new InvalidOperationException("A gauntlet needs room for at least one opponent monster.");
+            }
+
+            if (mustContain is not null &&
+                !PlayerTeam.Monsters.Any(monster => monster.GetType() == mustContain.GetType()))
+            {
+                throw new InvalidOperationException($"Your team must contain a {mustContain.GetType().Name} for this gauntlet.");
             }
 
             for (int i = 0; i < Iterations; i++)
@@ -94,6 +104,20 @@ namespace MySingingMonsters
             var monsters = new List<Monster>();
             int bedsUsed = 0;
 
+            if (mustContain is not null)
+            {
+                Monster requiredMonster = (Monster)Activator.CreateInstance(mustContain.GetType(), OpponentLevelCap)!;
+                int requiredBeds = CalculateBeds(requiredMonster);
+                if (requiredBeds > maxBeds)
+                {
+                    throw new InvalidOperationException(
+                        $"The must-contain monster needs {requiredBeds} beds, which exceeds the {maxBeds} bed limit.");
+                }
+
+                monsters.Add(requiredMonster);
+                bedsUsed += requiredBeds;
+            }
+
             while (monsters.Count < maxMonsters && bedsUsed < maxBeds)
             {
                 bool addedMonster = false;
@@ -113,7 +137,7 @@ namespace MySingingMonsters
 
                 if (!addedMonster)
                 {
-                    break;
+                    throw new InvalidOperationException("Failed to create a valid opponent team within the bed constraints.");
                 }
             }
 
@@ -169,6 +193,12 @@ namespace MySingingMonsters
                 throw new InvalidOperationException("No monsters satisfy the selected team restrictions and bed limit.");
             }
 
+            Type? mustContainType = mustContain?.GetType();
+            if (mustContainType is not null && !candidates.Any(candidate => candidate.Type == mustContainType))
+            {
+                throw new InvalidOperationException("The must-contain monster does not satisfy the selected team restrictions and bed limit.");
+            }
+
             List<Type> selectedTypes = new();
             List<int> selectedCandidateIndices = new();
             var selectedSpecies = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
@@ -203,7 +233,9 @@ namespace MySingingMonsters
 
             void SearchCombinations(int startIndex, int bedsUsed)
             {
-                if (selectedTypes.Count > 0 && evaluatedCombinations.Add(CreateCombinationKey()))
+                if (selectedTypes.Count > 0 &&
+                    (mustContainType is null || selectedTypes.Contains(mustContainType)) &&
+                    evaluatedCombinations.Add(CreateCombinationKey()))
                 {
                     int waves = EvaluateTeam(selectedTypes, maximumWaves, maximumLosses);
                     teamsEvaluated++;
