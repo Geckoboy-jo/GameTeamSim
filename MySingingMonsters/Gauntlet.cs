@@ -10,6 +10,7 @@ namespace MySingingMonsters
 {
     internal class Gauntlet
     {
+        public Dictionary<int, Team> TeamCombinations;
         private readonly record struct TeamCombination(int First, int Second, int Third, int Count);
 
         public Team PlayerTeam;
@@ -66,9 +67,19 @@ namespace MySingingMonsters
 
             for (int i = 0; i < Iterations; i++)
             {
+            
                 wrapper.Player = CreateFreshPlayerTeam();
-                List<Monster> enemyMonsters = CreateOpponentTeam();
-                wrapper.Opononent = new Team(enemyMonsters);
+
+                if (TeamCombinations.ContainsKey(i))
+                {
+                    wrapper.Opononent = TeamCombinations[i];
+                }
+                else
+                {
+                    List<Monster> enemyMonsters = CreateOpponentTeam();
+                    wrapper.Opononent = new Team(enemyMonsters);
+                    TeamCombinations[i] = wrapper.Opononent;
+                }
 
                 if (wrapper.game())
                 {
@@ -77,7 +88,7 @@ namespace MySingingMonsters
                 else
                 {
                     losses++;
-                    opponentsThatWon.AddRange(enemyMonsters.Where(monster => monster.isAlive));
+                    opponentsThatWon.AddRange(wrapper.Opononent.Monsters.Where(monster => monster.isAlive));
                 }
             }
 
@@ -124,7 +135,7 @@ namespace MySingingMonsters
                 for (int attempt = 0; attempt < 100; attempt++)
                 {
                     Monster monster = wrapper.getRandomMonster(
-                        contains, natOnly, ethOnly, requiredNumElements, allowedElements, OpponentLevelCap);
+                        mustContain?.elems.FirstOrDefault() ?? new Element("None"), natOnly, ethOnly, requiredNumElements, allowedElements, OpponentLevelCap);
                     int monsterBeds = CalculateBeds(monster);
                     if (bedsUsed + monsterBeds <= maxBeds)
                     {
