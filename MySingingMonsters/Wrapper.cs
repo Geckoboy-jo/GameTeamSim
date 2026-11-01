@@ -56,11 +56,11 @@ namespace MySingingMonsters
         {
             foreach (Monster monster in Player.Monsters)
             {
-                monster.HP = monster.baseHp;
+                monster.HP = monster.MaxHP;
             }
             foreach (Monster monster in Opononent.Monsters)
             {
-                monster.HP = monster.baseHp;
+                monster.HP = monster.MaxHP;
             }
             while (Player.lost == false && Opononent.lost == false)
             {
@@ -70,12 +70,15 @@ namespace MySingingMonsters
             }
             return Player.lost ? false : true;
         }
+        public (Monster Monster, Attack Attack, float Damage)? LastTurn { get; private set; }
+
         public void turn(Team O, Team D)
         {
             float maxDamage = 0;
             Monster? bestMonster = null;
+            Attack? bestAttack = null;
             foreach (Monster monster in O.Monsters)
-            {   
+            {
                 if(monster.isAlive == false) continue;
                 foreach (Attack attack in monster.attacks)
                 {
@@ -84,16 +87,18 @@ namespace MySingingMonsters
                     {
                         maxDamage = damage;
                         bestMonster = monster;
+                        bestAttack = attack;
                     }
                 }
             }
-            if (bestMonster is null)
+            if (bestMonster is null || bestAttack is null)
             {
                 O.lost = true;
                 return;
             }
             O.Active = bestMonster;
             D.Active.takeDamage(maxDamage);
+            LastTurn = (bestMonster, bestAttack, maxDamage);
             if (D.Active.isAlive == false) 
             {
                 foreach (Monster monster in D.Monsters)
@@ -107,7 +112,7 @@ namespace MySingingMonsters
                 D.lost = true;
             } 
         }
-        public float calculateDamage(Monster O, Attack A, Monster D)
+        public float CalculateMultiplier(Attack A, Monster D)
         {
             float multiplier = 1;
             foreach (Element element in D.elems)
@@ -119,20 +124,46 @@ namespace MySingingMonsters
                     else if (D.elems.Count == 3) multiplier = multiplier * 1.33f;
                     else if (D.elems.Count == 4) multiplier = multiplier * 1.25f;
                 }
-                if(A.type.weakTo == element.name)
+                if (A.type.weakTo == element.name)
                 {
                     if (D.elems.Count == 1) multiplier = multiplier * 0.5f;
                     else if (D.elems.Count == 2) multiplier = multiplier * 0.66f;
                     else if (D.elems.Count == 3) multiplier = multiplier * 0.75f;
                     else if (D.elems.Count == 4) multiplier = multiplier * 0.8f;
                 }
-                A.timesUsed++;
-                
             }
+
+            return multiplier;
+        }
+
+        public float calculateDamage(Monster O, Attack A, Monster D)
+        {
+            float multiplier = CalculateMultiplier(A, D);
+            A.timesUsed += D.elems.Count;
             float damage =  multiplier * O.Attack * A.basePower;
-            if(A.type.isEtherial == true)
+            return damage;
+        }
+
+        public float ApplyMove(Team O, Team D, Monster attacker, Attack attack)
+        {
+            float damage = calculateDamage(attacker, attack, D.Active);
+            if(attack.type.isEtherial == true)
             {
-                O.heal(calculateHealing(A, damage));
+                attacker.heal(calculateHealing(attack, damage));
+            }
+            O.Active = attacker;
+            D.Active.takeDamage(damage);
+            if (D.Active.isAlive == false)
+            {
+                foreach (Monster monster in D.Monsters)
+                {
+                    if (monster.isAlive == true)
+                    {
+                        D.Active = monster;
+                        return damage;
+                    }
+                }
+                D.lost = true;
             }
             return damage;
         }

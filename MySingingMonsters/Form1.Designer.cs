@@ -44,6 +44,8 @@ namespace MySingingMonsters
             gauntletIterationsLabel = new Label();
             gauntletIterationsInput = new NumericUpDown();
             calculateBestTeamButton = new Button();
+            manualModeButton = new Button();
+            switchSidesButton = new Button();
             runGauntletButton = new Button();
             startButton = new Button();
             resultLabel = new Label();
@@ -213,6 +215,8 @@ namespace MySingingMonsters
             resultPanel.Controls.Add(gauntletIterationsLabel);
             resultPanel.Controls.Add(gauntletIterationsInput);
             resultPanel.Controls.Add(calculateBestTeamButton);
+            resultPanel.Controls.Add(manualModeButton);
+            resultPanel.Controls.Add(switchSidesButton);
             resultPanel.Controls.Add(runGauntletButton);
             resultPanel.Controls.Add(startButton);
             resultPanel.Controls.Add(resultLabel);
@@ -227,7 +231,7 @@ namespace MySingingMonsters
             gauntletIterationsLabel.AutoSize = true;
             gauntletIterationsLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             gauntletIterationsLabel.ForeColor = Color.FromArgb(34, 34, 59);
-            gauntletIterationsLabel.Location = new Point(495, 22);
+            gauntletIterationsLabel.Location = new Point(590, 22);
             gauntletIterationsLabel.Name = "gauntletIterationsLabel";
             gauntletIterationsLabel.Size = new Size(110, 19);
             gauntletIterationsLabel.TabIndex = 4;
@@ -237,11 +241,11 @@ namespace MySingingMonsters
             // 
             gauntletIterationsInput.Font = new Font("Segoe UI", 10F);
             gauntletIterationsInput.Increment = new decimal(new int[] { 10000, 0, 0, 0 });
-            gauntletIterationsInput.Location = new Point(635, 16);
+            gauntletIterationsInput.Location = new Point(700, 16);
             gauntletIterationsInput.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
             gauntletIterationsInput.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             gauntletIterationsInput.Name = "gauntletIterationsInput";
-            gauntletIterationsInput.Size = new Size(160, 25);
+            gauntletIterationsInput.Size = new Size(110, 25);
             gauntletIterationsInput.TabIndex = 5;
             gauntletIterationsInput.ThousandsSeparator = true;
             gauntletIterationsInput.Value = new decimal(new int[] { 100000, 0, 0, 0 });
@@ -253,23 +257,51 @@ namespace MySingingMonsters
             calculateBestTeamButton.FlatStyle = FlatStyle.Flat;
             calculateBestTeamButton.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             calculateBestTeamButton.ForeColor = Color.White;
-            calculateBestTeamButton.Location = new Point(260, 14);
+            calculateBestTeamButton.Location = new Point(150, 14);
             calculateBestTeamButton.Name = "calculateBestTeamButton";
-            calculateBestTeamButton.Size = new Size(210, 36);
+            calculateBestTeamButton.Size = new Size(170, 36);
             calculateBestTeamButton.TabIndex = 6;
             calculateBestTeamButton.Text = "Calculate Best Team";
             calculateBestTeamButton.UseVisualStyleBackColor = false;
-            // 
+            //
+            // manualModeButton
+            //
+            manualModeButton.BackColor = Color.FromArgb(155, 89, 182);
+            manualModeButton.FlatAppearance.BorderSize = 0;
+            manualModeButton.FlatStyle = FlatStyle.Flat;
+            manualModeButton.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            manualModeButton.ForeColor = Color.White;
+            manualModeButton.Location = new Point(330, 14);
+            manualModeButton.Name = "manualModeButton";
+            manualModeButton.Size = new Size(120, 36);
+            manualModeButton.TabIndex = 7;
+            manualModeButton.Text = "Manual Mode";
+            manualModeButton.UseVisualStyleBackColor = false;
+            //
+            // switchSidesButton
+            //
+            switchSidesButton.BackColor = Color.FromArgb(52, 152, 219);
+            switchSidesButton.FlatAppearance.BorderSize = 0;
+            switchSidesButton.FlatStyle = FlatStyle.Flat;
+            switchSidesButton.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            switchSidesButton.ForeColor = Color.White;
+            switchSidesButton.Location = new Point(460, 14);
+            switchSidesButton.Name = "switchSidesButton";
+            switchSidesButton.Size = new Size(120, 36);
+            switchSidesButton.TabIndex = 8;
+            switchSidesButton.Text = "Switch Sides";
+            switchSidesButton.UseVisualStyleBackColor = false;
+            //
             // runGauntletButton
-            // 
+            //
             runGauntletButton.BackColor = Color.FromArgb(0, 130, 120);
             runGauntletButton.FlatAppearance.BorderSize = 0;
             runGauntletButton.FlatStyle = FlatStyle.Flat;
             runGauntletButton.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             runGauntletButton.ForeColor = Color.White;
-            runGauntletButton.Location = new Point(830, 14);
+            runGauntletButton.Location = new Point(820, 14);
             runGauntletButton.Name = "runGauntletButton";
-            runGauntletButton.Size = new Size(210, 36);
+            runGauntletButton.Size = new Size(160, 36);
             runGauntletButton.TabIndex = 3;
             runGauntletButton.Text = "Run Gauntlet";
             runGauntletButton.UseVisualStyleBackColor = false;
@@ -281,9 +313,9 @@ namespace MySingingMonsters
             startButton.FlatStyle = FlatStyle.Flat;
             startButton.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             startButton.ForeColor = Color.White;
-            startButton.Location = new Point(1060, 14);
+            startButton.Location = new Point(990, 14);
             startButton.Name = "startButton";
-            startButton.Size = new Size(200, 36);
+            startButton.Size = new Size(190, 36);
             startButton.TabIndex = 2;
             startButton.Text = "Start Battle";
             startButton.UseVisualStyleBackColor = false;
@@ -362,6 +394,8 @@ namespace MySingingMonsters
         private Button startButton;
         private Button runGauntletButton;
         private Button calculateBestTeamButton;
+        private Button manualModeButton;
+        private Button switchSidesButton;
         private Label gauntletIterationsLabel;
         private NumericUpDown gauntletIterationsInput;
         private Panel resultPanel;

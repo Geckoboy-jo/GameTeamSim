@@ -8,6 +8,8 @@ namespace MySingingMonsters
         private readonly Button[] opponentButtons;
         private readonly TrackBar[] playerLevelSliders;
         private readonly TrackBar[] opponentLevelSliders;
+        private readonly Label[] playerLevelLabels;
+        private readonly Label[] opponentLevelLabels;
         private readonly ContextMenuStrip gauntletMenu;
         private static readonly string[] GauntletNames =
         {
@@ -51,14 +53,16 @@ namespace MySingingMonsters
 
             playerButtons = new[] { button1, button2, button3 };
             opponentButtons = new[] { opponentButton1, opponentButton2, opponentButton3 };
-            playerLevelSliders = AddLevelSliders(monstersPanel, playerButtons);
-            opponentLevelSliders = AddLevelSliders(opponentPanel, opponentButtons);
+            (playerLevelSliders, playerLevelLabels) = AddLevelSliders(monstersPanel, playerButtons);
+            (opponentLevelSliders, opponentLevelLabels) = AddLevelSliders(opponentPanel, opponentButtons);
             button3.Click += (_, _) => SelectMonster(false, 2);
             opponentButton1.Click += (_, _) => SelectMonster(true, 0);
             opponentButton2.Click += (_, _) => SelectMonster(true, 1);
             opponentButton3.Click += (_, _) => SelectMonster(true, 2);
             runGauntletButton.Click += runGauntletButton_Click;
             calculateBestTeamButton.Click += calculateBestTeamButton_Click;
+            manualModeButton.Click += manualModeButton_Click;
+            switchSidesButton.Click += switchSidesButton_Click;
             startButton.Enabled = false;
             winBox.Text = "Choose your teams, then start the battle.";
         }
@@ -88,6 +92,40 @@ namespace MySingingMonsters
             }
 
             await RunSimulationAsync();
+        }
+
+        private void manualModeButton_Click(object? sender, EventArgs e)
+        {
+            if (!playerMonsterTypes.Any(type => type is not null) ||
+                !opponentMonsterTypes.Any(type => type is not null))
+            {
+                winBox.Text = "Choose at least one monster for both teams.";
+                return;
+            }
+
+            RunManualBattle();
+        }
+
+        private void switchSidesButton_Click(object? sender, EventArgs e)
+        {
+            for (int index = 0; index < playerMonsterTypes.Length; index++)
+            {
+                (playerMonsterTypes[index], opponentMonsterTypes[index]) =
+                    (opponentMonsterTypes[index], playerMonsterTypes[index]);
+                (playerButtons[index].Text, opponentButtons[index].Text) =
+                    (opponentButtons[index].Text, playerButtons[index].Text);
+                (playerLevelSliders[index].Value, opponentLevelSliders[index].Value) =
+                    (opponentLevelSliders[index].Value, playerLevelSliders[index].Value);
+                playerLevelLabels[index].Text = $"Lv. {playerLevelSliders[index].Value}";
+                opponentLevelLabels[index].Text = $"Lv. {opponentLevelSliders[index].Value}";
+            }
+
+            bool bothTeamsHaveMonsters = playerMonsterTypes.Any(type => type is not null) &&
+                opponentMonsterTypes.Any(type => type is not null);
+            startButton.Enabled = bothTeamsHaveMonsters;
+            winBox.Text = bothTeamsHaveMonsters
+                ? "Sides switched. Teams ready. Press Start Battle."
+                : "Sides switched. Choose at least one monster for both teams.";
         }
 
         private async void calculateBestTeamButton_Click(object? sender, EventArgs e)
@@ -475,6 +513,8 @@ namespace MySingingMonsters
 
             runGauntletButton.Enabled = enabled;
             calculateBestTeamButton.Enabled = enabled;
+            manualModeButton.Enabled = enabled;
+            switchSidesButton.Enabled = enabled;
             gauntletIterationsInput.Enabled = enabled;
             startButton.Enabled = enabled && playerMonsterTypes.Any(type => type is not null) &&
                 opponentMonsterTypes.Any(type => type is not null);
@@ -585,9 +625,206 @@ namespace MySingingMonsters
             }
         }
 
-        private static TrackBar[] AddLevelSliders(Panel panel, Button[] buttons)
+        private void RunManualBattle()
+        {
+            List<Monster> playerMonsters = Enumerable.Range(0, playerMonsterTypes.Length)
+                .Where(index => playerMonsterTypes[index] is not null)
+                .Select(index => (Monster)Activator.CreateInstance(
+                    playerMonsterTypes[index]!, playerLevelSliders[index].Value)!)
+                .ToList();
+            List<Monster> opponentMonsters = Enumerable.Range(0, opponentMonsterTypes.Length)
+                .Where(index => opponentMonsterTypes[index] is not null)
+                .Select(index => (Monster)Activator.CreateInstance(
+                    opponentMonsterTypes[index]!, opponentLevelSliders[index].Value)!)
+                .ToList();
+
+            var wrapper = new Wrapper(playerMonsters, opponentMonsters);
+            foreach (Monster monster in wrapper.Player.Monsters.Concat(wrapper.Opononent.Monsters))
+            {
+                monster.HP = monster.MaxHP;
+            }
+
+            SetGauntletControlsEnabled(false);
+            bool forfeited = false;
+            string opponentSummary = "The opponent has not acted yet.";
+
+            try
+            {
+                while (!wrapper.Player.lost && !wrapper.Opononent.lost)
+                {
+                    Monster defender = wrapper.Opononent.Active;
+                    ManualMoveChoice? choice = ShowManualMoveDialog(wrapper, opponentSummary);
+                    if (choice is null)
+                    {
+                        forfeited = true;
+                        wrapper.Player.lost = true;
+                        break;
+                    }
+
+                    float multiplier = wrapper.CalculateMultiplier(choice.Attack, defender);
+                    float damage = wrapper.ApplyMove(wrapper.Player, wrapper.Opononent, choice.Monster, choice.Attack);
+                    string playerAction =
+                        $"{FormatMonsterName(choice.Monster.GetType().Name)} used {choice.Attack.name} " +
+                        $"(x{multiplier:0.##}) for {damage:F1} damage.";
+                    if (!defender.isAlive)
+                    {
+                        playerAction += $" {FormatMonsterName(defender.GetType().Name)} fainted!";
+                    }
+                    if (wrapper.Opononent.lost)
+                    {
+                        winBox.Text = playerAction;
+                        break;
+                    }
+
+                    Monster activeBefore = wrapper.Player.Active;
+                    wrapper.turn(wrapper.Opononent, wrapper.Player);
+                    opponentSummary = BuildOpponentSummary(wrapper, activeBefore);
+                    winBox.Text = $"{playerAction} {opponentSummary}";
+                }
+            }
+            finally
+            {
+                SetGauntletControlsEnabled(true);
+            }
+
+            if (forfeited)
+            {
+                winBox.Text = "You forfeited the battle.";
+            }
+            else
+            {
+                winBox.Text = wrapper.Player.lost ? "You lost." : "You won!";
+            }
+        }
+
+        private string BuildOpponentSummary(Wrapper wrapper, Monster target)
+        {
+            if (wrapper.LastTurn is not { } last)
+            {
+                return "The opponent could not act.";
+            }
+
+            string attackerName = FormatMonsterName(last.Monster.GetType().Name);
+            string targetName = FormatMonsterName(target.GetType().Name);
+            string summary =
+                $"Opponent's {attackerName} used {last.Attack.name} on {targetName} " +
+                $"for {last.Damage:F1} damage";
+            if (!target.isAlive)
+            {
+                summary += $" — {targetName} fainted!";
+                if (!wrapper.Player.lost)
+                {
+                    Monster replacement = wrapper.Player.Active;
+                    summary += $" {FormatMonsterName(replacement.GetType().Name)} is now active " +
+                        $"(HP {replacement.HP:F0}/{replacement.MaxHP:F0}).";
+                }
+            }
+            else
+            {
+                summary += $" ({targetName} HP {target.HP:F0}/{target.MaxHP:F0}).";
+            }
+
+            return summary;
+        }
+
+        private ManualMoveChoice? ShowManualMoveDialog(Wrapper wrapper, string opponentSummary)
+        {
+            Monster defender = wrapper.Opononent.Active;
+            using var dialog = new Form
+            {
+                Text = "Manual Mode - Choose Your Move",
+                StartPosition = FormStartPosition.CenterParent,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                ClientSize = new Size(780, 470),
+                MinimizeBox = false,
+                MaximizeBox = false
+            };
+
+            var summaryLabel = new Label
+            {
+                AutoEllipsis = true,
+                Font = new Font("Segoe UI", 9F, FontStyle.Italic),
+                ForeColor = Color.FromArgb(90, 90, 110),
+                Location = new Point(16, 12),
+                Size = new Size(748, 36),
+                Text = $"Previous turn: {opponentSummary}"
+            };
+
+            var defenderLabel = new Label
+            {
+                AutoSize = true,
+                Font = new Font("Segoe UI", 10F, FontStyle.Bold),
+                Location = new Point(16, 54),
+                Text = $"Opponent: {FormatMonsterName(defender.GetType().Name)} — HP {defender.HP:F0}/{defender.MaxHP:F0}"
+            };
+
+            var moveList = new ListBox
+            {
+                Font = new Font("Segoe UI", 10F),
+                HorizontalScrollbar = true,
+                IntegralHeight = false,
+                Location = new Point(16, 82),
+                Size = new Size(748, 300)
+            };
+
+            var options = new List<ManualMoveChoice>();
+            foreach (Monster monster in wrapper.Player.Monsters)
+            {
+                if (!monster.isAlive)
+                {
+                    continue;
+                }
+
+                foreach (Attack attack in monster.attacks)
+                {
+                    float multiplier = wrapper.CalculateMultiplier(attack, defender);
+                    float damage = multiplier * monster.Attack * attack.basePower;
+                    options.Add(new ManualMoveChoice(monster, attack));
+                    moveList.Items.Add(
+                        $"{FormatMonsterName(monster.GetType().Name)} (HP {monster.HP:F0}/{monster.MaxHP:F0}) — " +
+                        $"{attack.name} — Multiplier x{multiplier:0.##} — Damage {damage:F1}");
+                }
+            }
+
+            moveList.SelectedIndex = 0;
+
+            var useMoveButton = new Button
+            {
+                Text = "Use Move",
+                DialogResult = DialogResult.OK,
+                Location = new Point(560, 404),
+                Size = new Size(96, 34)
+            };
+            var forfeitButton = new Button
+            {
+                Text = "Forfeit",
+                DialogResult = DialogResult.Cancel,
+                Location = new Point(668, 404),
+                Size = new Size(96, 34)
+            };
+
+            dialog.Controls.Add(summaryLabel);
+            dialog.Controls.Add(defenderLabel);
+            dialog.Controls.Add(moveList);
+            dialog.Controls.Add(useMoveButton);
+            dialog.Controls.Add(forfeitButton);
+            dialog.AcceptButton = useMoveButton;
+            dialog.CancelButton = forfeitButton;
+
+            if (dialog.ShowDialog(this) != DialogResult.OK || moveList.SelectedIndex < 0)
+            {
+                return null;
+            }
+
+            return options[moveList.SelectedIndex];
+        }
+
+        private sealed record ManualMoveChoice(Monster Monster, Attack Attack);
+
+        private static (TrackBar[] Sliders, Label[] Labels) AddLevelSliders(Panel panel, Button[] buttons)
         {
             var sliders = new TrackBar[buttons.Length];
+            var labels = new Label[buttons.Length];
             for (int index = 0; index < buttons.Length; index++)
             {
                 Button button = buttons[index];
@@ -620,9 +857,10 @@ namespace MySingingMonsters
                 panel.Controls.Add(slider);
                 panel.Controls.Add(levelLabel);
                 sliders[index] = slider;
+                labels[index] = levelLabel;
             }
 
-            return sliders;
+            return (sliders, labels);
         }
 
         private static Type[] GetMonsterTypes()

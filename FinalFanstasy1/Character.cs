@@ -20,7 +20,7 @@ namespace FinalFanstasy1
         private SpellSlot L6 { get; set; } = new SpellSlot(6);
         private SpellSlot L7 { get; set; } = new SpellSlot(7);
         private SpellSlot L8 { get; set; } = new SpellSlot(8);
-
+        private List<string> resistance = new List<string>();
         #endregion
         #region Getters and Setters
         //getters and setters
@@ -33,6 +33,7 @@ namespace FinalFanstasy1
         public Stat getHitPercentage(){return hitPercentage;}
         public Stat getMagicDefence(){return MagicDefence;}
         public bool getIsAlive(){return IsAlive;}
+        public List<string> getResistance(){return resistance;}
         public SpellSlot getL1(){return L1;}
         public SpellSlot getL2(){return L2;}
         public SpellSlot getL3(){return L3;}
@@ -59,6 +60,7 @@ namespace FinalFanstasy1
         public void setL6(SpellSlot l6){L6 = l6;}
         public void setL7(SpellSlot l7){L7 = l7;}
         public void setL8(SpellSlot l8){L8 = l8;}
+        public void setResistance(List<string> resistance){this.resistance = resistance;}
         #endregion
         #region Methods
         public void takeDamage(int damage)
@@ -73,7 +75,10 @@ namespace FinalFanstasy1
         public void heal(int amount)
         {if (getIsAlive()) getHealth().setCurrent(Math.Min(getHealth().getCurrent() + amount, getHealth().getMax()));}
         
-        
+        public bool resists(string r)
+        {
+            return resistance.Contains(r);
+        }
         #endregion
     }
 }

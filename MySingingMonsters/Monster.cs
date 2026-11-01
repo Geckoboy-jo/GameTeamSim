@@ -10,6 +10,7 @@ namespace MySingingMonsters
     {
         public float HP { get; set; }
         public float baseHp { get; set; }
+        public float MaxHP => (float)(baseHp * (1 + .2692f * (level - 1)));
         public float Attack { get; set; }
         public float baseAttack { get; set; }
 
@@ -19,7 +20,7 @@ namespace MySingingMonsters
         public List<Attack> attacks;
         public void setStats()
         {
-            HP = (float)(baseHp*(1+.2692f*(level-1)));
+            HP = MaxHP;
             Attack = (float)(baseAttack * (1 + .2692f * (level - 1)));
             isAlive = true;
         }
@@ -35,7 +36,7 @@ namespace MySingingMonsters
         public void heal(float healAmount)
         {
             HP += healAmount;
-            if (HP > baseHp){HP = baseHp;}
+            if (HP > MaxHP){HP = MaxHP;}
         }
        
     }

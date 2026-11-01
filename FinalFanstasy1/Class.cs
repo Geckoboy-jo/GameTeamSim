@@ -9,20 +9,22 @@ namespace FinalFanstasy1
         private Item shieldSlot;
         private int aborbsion;
         private int evasion;
+        
         #endregion
-    
         #region Getters and Setters
         public Item getHeadSlot(){return headSlot;}
         public Item getBodySlot(){return bodySlot;}
         public Item getHandSlot(){return handSlot;}
         public Item getShieldSlot(){return shieldSlot;}
         public int getAborbsion(){return aborbsion;}
+        public int getEvasion(){return evasion;}
 
         public void setHeadSlot(Item headSlot){this.headSlot = headSlot;}
         public void setBodySlot(Item bodySlot){this.bodySlot = bodySlot;}
         public void setHandSlot(Item handSlot){this.handSlot = handSlot;}
         public void setShieldSlot(Item shieldSlot){this.shieldSlot = shieldSlot;}
         public void setAborbsion(int aborbsion){this.aborbsion = aborbsion;}
+        public void setEvasion(int evasion){this.evasion = evasion;}
         #endregion
         #region Methods
         public void calculateTotalStatsFromEquipment()
@@ -35,7 +37,14 @@ namespace FinalFanstasy1
         public void applyStats(Item item)
         {
             aborbsion += item.getAborbsion();
-
+            evasion += item.getEvasion();
+            foreach (string resistance in item.getResistance())
+            {
+                if (!getResistance().Contains(resistance))
+                {
+                    getResistance().Add(resistance);
+                }
+            }
         }
         #endregion
         
