@@ -32,11 +32,10 @@ jobs:
         run: |
             Invoke-WebRequest -Uri https://broth.itch.zone/butler/windows-amd64/LATEST/archive/default -OutFile butler.zip
             Expand-Archive -Path butler.zip -DestinationPath butler-bin
-
       - name: Deploy to itch.io
         env:
-          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+          BUTLER_API_KEY: TTXh5JD8WKeUaCZACMbOlx4eiqApK8co3xVtsSnO
         run: |
           ./butler-bin/butler push `
             build/MySingingMonsters `
-            ${{ secrets.ITCHUSERNAME }}/${{ secrets.GAME_NAME}}:windows'
+            Geckodude07/my-singing-monsters-battle-sim:windows

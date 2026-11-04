@@ -21,6 +21,6 @@ namespace MySingingMonsters
             attacks.Add(new Attack("Silk Strum", new Element("None"), 1));
             if (level >= 5) attacks.Add(new Attack("Fretful Feeling", new Element("Shadow"), 1.11f));
             if (level >= 10) attacks.Add(new Attack("Amped Abdomen", new Element("Mech"), 1.22f));
-        }//test
+        }
     }
 }
