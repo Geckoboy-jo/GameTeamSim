@@ -1,0 +1,42 @@
+name: Build and deploy MySinginMonsters
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'MySingingMonsters/**'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Build Game
+        run: |
+          dotnet publish MySingingMonsters/MySingingMonsters.csproj \
+            -c Release \
+            -r win-x64 \
+            --self-contained true \
+            -p:PublishSingleFile=true \
+            -o build/MySingingMonsters
+
+      - name: Install Butler
+        run: |
+          curl -L https://broth.itch.zone/butler/linux-amd64/LATEST/archive/default -o butler.zip
+          unzip butler.zip
+          chmod +x butler
+
+      - name: Deploy to itch.io
+        env:
+          BUTLER_API_KEY: ${{ secrets.TTXh5JD8WKeUaCZACMbOlx4eiqApK8co3xVtsSnO }}
+        run: |
+          ./butler push \
+            build/MySingingMonsters \
+            ${{ secrets.Geckodude07 }}/${{ secrets.my-singing-monsters-battle-sim }}:windows
