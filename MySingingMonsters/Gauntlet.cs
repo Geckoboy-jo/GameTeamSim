@@ -137,6 +137,7 @@ namespace MySingingMonsters
                 {
                     Monster monster = wrapper.getRandomMonster(
                         mustContain?.elems.FirstOrDefault() ?? new Element("None"), natOnly, ethOnly, requiredNumElements, allowedElements, OpponentLevelCap);
+                   
                     int monsterBeds = CalculateBeds(monster);
                     if (bedsUsed + monsterBeds <= maxBeds)
                     {
@@ -370,7 +371,6 @@ namespace MySingingMonsters
             {
                 beds++;
             }
-
             beds += monster.elems.Count(element => element.isEtherial) * 4;
             return beds;
         }
