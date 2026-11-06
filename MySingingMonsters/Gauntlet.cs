@@ -114,7 +114,7 @@ namespace MySingingMonsters
         {
             var monsters = new List<Monster>();
             int bedsUsed = 0;
-
+            bool addedMonster = false;
             if (mustContain is not null)
             {
                 Monster requiredMonster = (Monster)Activator.CreateInstance(mustContain.GetType(), OpponentLevelCap)!;
@@ -127,11 +127,12 @@ namespace MySingingMonsters
 
                 monsters.Add(requiredMonster);
                 bedsUsed += requiredBeds;
+                addedMonster = true;
             }
 
             while (monsters.Count < maxMonsters && bedsUsed < maxBeds)
             {
-                bool addedMonster = false;
+                
                 for (int attempt = 0; attempt < 100; attempt++)
                 {
                     Monster monster = wrapper.getRandomMonster(
